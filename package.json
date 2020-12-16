@@ -6,7 +6,9 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "antd": "^4.9.4",
     "braintree-web-drop-in-react": "^1.1.1",
+    "formik": "^2.2.6",
     "moment": "^2.24.0",
     "qs": "^6.9.4",
     "query-string": "^6.12.1",
@@ -36,5 +38,12 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8000"
+  "proxy": "http://localhost:8000",
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "singleQuote": true
+  }
 }

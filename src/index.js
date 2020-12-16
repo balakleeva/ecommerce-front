@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Routes from './Boot/Routes'
+import Routes from './Boot/Routes';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Routes />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import './styles.css'
+import 'antd/dist/antd.css';
+
+ReactDOM.render(<Routes />, document.getElementById('root'));
