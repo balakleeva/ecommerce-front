@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import useRequest from '../Utils/useRequest';
-import AuthorService from '../Services/AuhorService';
+import AuthorService from '../Services/AuthorService';
 
 function Author() {
   const { fetch: createFetch, state: createState } = useRequest(AuthorService.create);

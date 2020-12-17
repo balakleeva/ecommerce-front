@@ -6,6 +6,8 @@ import Home from '../Pages/Home';
 import Book from '../Pages/Book';
 import Login from '../Pages/Login';
 import Registration from '../Pages/Registration';
+import { default as AdminLogin } from '../Pages/Admin/Login';
+import Client from '../Pages/Admin/Client';
 
 const Routes = () => {
   return (
@@ -28,6 +30,17 @@ const Routes = () => {
         </Route>
         <Route path="/registration" exact>
           <Registration />
+        </Route>
+
+        <Route path="/admin">
+          <Switch>
+            <Route path="/admin/login" exact>
+              <AdminLogin />
+            </Route>
+            <Route path="/admin/client" exact>
+              <Client />
+            </Route>
+          </Switch>
         </Route>
       </Switch>
     </Router>

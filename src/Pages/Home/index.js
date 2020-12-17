@@ -17,8 +17,6 @@ function Home() {
     fetch();
   }, []);
 
-  console.log('payload', payload);
-
   return (
     <Layout>
       <h1>Home</h1>
