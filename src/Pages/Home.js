@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react';
-import GenreSelector from '../../Components/Selectors/GenreSelector';
-import useRequest from '../../Utils/useRequest';
-import BookService from '../../Services/BookService';
-import { Button, Card, Col, Row } from 'antd';
-import Layout from '../../Components/Layout';
-import Text from 'antd/lib/typography/Text';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import GenreSelector from '../Components/Selectors/GenreSelector'
+import useRequest from '../Utils/useRequest'
+import BookService from '../Services/BookService'
+import Layout from '../Components/Layout'
+import { Button, Card, Col, Row } from 'antd'
+import Text from 'antd/lib/typography/Text'
+import { Link } from 'react-router-dom'
 
 function Home() {
   const {
     fetch,
     state: { error, isLoading, payload },
-  } = useRequest(BookService.getAll);
+  } = useRequest(BookService.getAll)
 
   useEffect(() => {
-    fetch();
-  }, []);
+    fetch()
+  }, [])
 
   return (
     <Layout>
@@ -42,7 +42,7 @@ function Home() {
           ))}
       </Row>
     </Layout>
-  );
+  )
 }
 
-export default Home;
+export default Home

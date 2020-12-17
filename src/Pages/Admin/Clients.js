@@ -1,35 +1,27 @@
-import React, { useEffect } from 'react';
-import Layout from '../../Components/Admin/Layout';
-import useRequest from '../../Utils/useRequest';
-import ClientService from '../../Services/ClientService';
-import { Button, Table, Row, Col } from 'antd';
-import styled from 'styled-components';
-import Title from 'antd/lib/typography/Title';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import Layout from '../../Components/Admin/Layout'
+import useRequest from '../../Utils/useRequest'
+import ClientService from '../../Services/ClientService'
+import { Button, Table, Col } from 'antd'
+import Title from 'antd/lib/typography/Title'
+import { Link } from 'react-router-dom'
+import { Content, StyledRow } from '../../Components/StyledComponents'
 
-const Content = styled.div`
-  padding: 50px 100px;
-`;
-
-const StyledRow = styled(Row)`
-  margin-top: 20px;
-`;
-
-const Client = () => {
+const Clients = () => {
   const {
     fetch,
     state: { error, isLoading, payload },
-  } = useRequest(ClientService.getAll);
+  } = useRequest(ClientService.getAll)
 
   useEffect(() => {
-    fetch();
-  }, []);
+    fetch()
+  }, [])
 
-  console.log('pya', payload);
+  console.log('pya', payload)
 
   const handleDelete = (id) => {
-    console.log('id: ', id);
-  };
+    console.log('id: ', id)
+  }
 
   const columns = [
     {
@@ -55,7 +47,7 @@ const Client = () => {
         <Button onClick={() => handleDelete(record.id)}>Удалить</Button>
       ),
     },
-  ];
+  ]
 
   return (
     <Layout>
@@ -73,7 +65,7 @@ const Client = () => {
         <Table dataSource={payload} columns={columns} />
       </Content>
     </Layout>
-  );
-};
+  )
+}
 
-export default Client;
+export default Clients
