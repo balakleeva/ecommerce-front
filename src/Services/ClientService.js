@@ -6,5 +6,8 @@ export default {
 	},
 	create(data) {
 		return ApiService.post('/client', data);
+	},
+	login(data) {
+		return ApiService.post('/client/auth', data)
 	}
 }

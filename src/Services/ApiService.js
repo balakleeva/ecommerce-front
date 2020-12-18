@@ -3,7 +3,6 @@ import TokenService from './TokenService';
 
 const CONTENT_TYPE_JSON = 'application/json';
 
-
 export function prepareQueryString(params) {
   const updParams = Object.keys(params)
     .filter(key => params[key] !== null)

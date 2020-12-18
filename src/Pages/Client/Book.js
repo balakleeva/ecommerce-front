@@ -1,27 +1,28 @@
-import React, { useEffect } from 'react';
-import Layout from '../Components/Layout';
-import useRequest from '../Utils/useRequest';
-import BookService from '../Services/BookService';
-import { useParams } from 'react-router-dom';
-import Title from 'antd/lib/typography/Title';
-import { Col, Row } from 'antd';
-import Text from 'antd/lib/typography/Text';
+import React, { useEffect } from 'react'
+import Layout from '../../Components/Layout'
+import useRequest from '../../Utils/useRequest'
+import BookService from '../../Services/BookService'
+import { useParams } from 'react-router-dom'
+import Title from 'antd/lib/typography/Title'
+import { Col, Row } from 'antd'
+import Text from 'antd/lib/typography/Text'
+import Loader from '../../Components/Loader'
 
 const Book = () => {
-  const { bookId } = useParams();
+  const { bookId } = useParams()
 
   const {
     fetch,
     state: { error, isLoading, payload },
-  } = useRequest(BookService.getOne);
+  } = useRequest(BookService.getOne)
 
   useEffect(() => {
-    fetch(bookId);
-  }, []);
+    fetch(bookId)
+  }, [])
 
   return (
     <Layout>
-      {isLoading && <div>loading...</div>}
+      {isLoading && <Loader />}
       {!isLoading && payload && (
         <Row justify="center">
           <Col span={12}>
@@ -48,7 +49,6 @@ const Book = () => {
         </Row>
       )}
     </Layout>
-  );
-};
-
-export default Book;
+  )
+}
+export default Book

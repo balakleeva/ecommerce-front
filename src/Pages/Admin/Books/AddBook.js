@@ -21,6 +21,7 @@ const AddBook = () => {
             authorId: '',
             publisher: '',
             publishYear: '',
+            image: '',
           }}
           onSubmit={(values) => {
             BookService.create(values).then((response) => push('/admin/books'))
@@ -71,6 +72,14 @@ const AddBook = () => {
                 <Field name="publishYear">
                   {({ field }) => (
                     <Input placeholder="Введите год издания" {...field} />
+                  )}
+                </Field>
+              </StyledRow>
+
+              <StyledRow>
+                <Field name="image">
+                  {({ field }) => (
+                    <Input placeholder="Введите url картинки" {...field} />
                   )}
                 </Field>
               </StyledRow>

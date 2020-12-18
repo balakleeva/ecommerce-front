@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
-import useRequest from '../Utils/useRequest';
-import GenreService from '../Services/GenreService';
+import useRequest from '../../Utils/useRequest';
+import GenreService from '../../Services/GenreService';
 
 function Genre() {
   const { fetch: createFetch, state: createState } = useRequest(GenreService.create);
