@@ -10,6 +10,7 @@
     "antd": "^4.9.4",
     "braintree-web-drop-in-react": "^1.1.1",
     "formik": "^2.2.6",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.24.0",
     "qs": "^6.9.4",
     "query-string": "^6.12.1",

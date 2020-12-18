@@ -1,43 +1,55 @@
-import React from 'react';
-import Layout from '../../../Components/Admin/Layout';
-import { Button, Card, Input, Row } from 'antd';
-import { Field, Form, Formik } from 'formik';
+import React, { useContext } from 'react'
+import Layout from '../../../Components/Admin/Layout'
+import { Button, Card, Input, Row } from 'antd'
+import { Field, Form, Formik } from 'formik'
+import { StyledRow } from '../../../Components/StyledComponents'
+import AdminService from '../../../Services/AdminService'
+import AdminAuthContext from '../../../Contexts/AdminContext'
+import { useHistory } from 'react-router-dom'
 
 const Login = () => {
+  const { push } = useHistory()
+  const { handleLogin } = useContext(AdminAuthContext)
+
   return (
     <Layout>
       <Row justify="center" style={{ marginTop: '1rem' }}>
         <Card>
           <Formik
             initialValues={{
-              email: '',
+              login: '',
               password: '',
             }}
-            onSubmit={(values) => console.log('---', values)}
+            onSubmit={(values) => {
+              AdminService.auth(values).then((response) => {
+                handleLogin(response)
+                push('/admin/books')
+              })
+            }}
           >
             {() => (
               <Form>
-                <Field name="email">
-                  {() => (
-                    <Input
-                      type="email"
-                      placeholder="Введите эмейл"
-                      className="login-row"
-                    />
-                  )}
-                </Field>
+                <StyledRow>
+                  <Field name="login">
+                    {({ field }) => (
+                      <Input
+                        type="text"
+                        placeholder="Введите логин"
+                        {...field}
+                      />
+                    )}
+                  </Field>
+                </StyledRow>
 
-                <Field name="password">
-                  {() => (
-                    <Input
-                      type="password"
-                      placeholder="Введите пароль"
-                      className="login-row"
-                    />
-                  )}
-                </Field>
+                <StyledRow>
+                  <Field name="password">
+                    {({ field }) => (
+                      <Input.Password placeholder="Введите пароль" {...field} />
+                    )}
+                  </Field>
+                </StyledRow>
 
-                <Button block type="submit">
+                <Button block htmlType="submit">
                   Войти
                 </Button>
               </Form>
@@ -46,7 +58,7 @@ const Login = () => {
         </Card>
       </Row>
     </Layout>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
