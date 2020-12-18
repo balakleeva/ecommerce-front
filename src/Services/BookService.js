@@ -16,4 +16,7 @@ export default {
   update(bookId, data) {
     return ApiService.put(`/book/${bookId}`, data)
   },
+  getByIds(data) {
+    return ApiService.get('/book/byIds', data)
+  },
 }

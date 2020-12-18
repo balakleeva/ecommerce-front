@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react'
 import Layout from '../../../Components/Admin/Layout'
 import { Content } from '../../../Components/StyledComponents'
-import { Formik, Form, Field } from 'formik'
-import { Button, Input } from 'antd'
-import GenreSelector from '../../../Components/Selectors/GenreSelector'
-import AuthorSelector from '../../../Components/Selectors/AuthorSelector'
 import BookService from '../../../Services/BookService'
 import { useHistory, useParams } from 'react-router-dom'
 import useRequest from '../../../Utils/useRequest'
+import BookForm from '../../../Components/Forms/Admin/BookForm'
+import Loader from '../../../Components/Loader';
 
 const AddBook = () => {
   const { push } = useHistory()
@@ -22,68 +20,28 @@ const AddBook = () => {
     fetch(bookId)
   }, [])
 
+  const handleSubmit = (values) => {
+    BookService.update(bookId, values).then(() => push('/admin/books'))
+  }
+
   return (
     <Layout>
       <Content>
-        {payload && (
-          <Formik
-            initialValues={{
+        {isLoading && <Loader />}
+        {!isLoading && payload && (
+          <BookForm
+            initValues={{
               name: payload.name,
               genreId: payload.genreId,
               authorId: payload.authorId,
               publisher: payload.publisher,
               publishYear: payload.publishYear,
+              image: payload.image,
+              buyPrice: payload.buyPrice,
+              rentPrice: payload.rentPrice,
             }}
-            onSubmit={(values) => {
-              BookService.update(bookId, values).then(() =>
-                push('/admin/books')
-              )
-            }}
-          >
-            {({ setFieldValue }) => (
-              <Form>
-                <Field name="name">
-                  {({ field }) => (
-                    <Input placeholder="Введите название" {...field} />
-                  )}
-                </Field>
-
-                <Field name="genreId">
-                  {() => (
-                    <GenreSelector
-                      onChange={(val) => {
-                        setFieldValue('genreId', val)
-                      }}
-                    />
-                  )}
-                </Field>
-
-                <Field name="authorId">
-                  {() => (
-                    <AuthorSelector
-                      onChange={(val) => {
-                        setFieldValue('authorId', val)
-                      }}
-                    />
-                  )}
-                </Field>
-
-                <Field name="publisher">
-                  {({ field }) => (
-                    <Input placeholder="Введите издательство" {...field} />
-                  )}
-                </Field>
-
-                <Field name="publishYear">
-                  {({ field }) => (
-                    <Input placeholder="Введите год издания" {...field} />
-                  )}
-                </Field>
-
-                <Button htmlType="submit">Добавить</Button>
-              </Form>
-            )}
-          </Formik>
+            onSubmit={handleSubmit}
+          />
         )}
       </Content>
     </Layout>

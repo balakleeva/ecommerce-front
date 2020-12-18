@@ -46,6 +46,16 @@ const Books = () => {
       dataIndex: 'publishYear',
     },
     {
+      title: 'Цена продажи',
+      key: 'buyPrice',
+      dataIndex: 'buyPrice',
+    },
+    {
+      title: 'Цена аренды',
+      key: 'rentPrice',
+      dataIndex: 'rentPrice',
+    },
+    {
       title: '',
       key: 'action',
       width: '100',

@@ -2,12 +2,14 @@ import React, { useContext, useEffect } from 'react'
 import useRequest from '../../Utils/useRequest'
 import BookService from '../../Services/BookService'
 import Layout from '../../Components/Layout'
-import { Button, Card, Col, Row } from 'antd'
+import { Button, Card, Col, Image, Row } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import { Link } from 'react-router-dom'
 import Loader from '../../Components/Loader'
 import ClientAuthContext from '../../Contexts/ClientContext'
 import { Content, StyledRow } from '../../Components/StyledComponents'
+import Title from 'antd/lib/typography/Title'
+import { handleAddToCart } from '../../Utils/cart';
 
 function Home() {
   const {
@@ -21,27 +23,24 @@ function Home() {
 
   const { isAuth } = useContext(ClientAuthContext)
 
-  const handleAddToCart = (bookId) => {
-    let cart = []
-    if (localStorage.getItem('cart')) {
-      cart = JSON.parse(localStorage.getItem('cart'))
-    }
-
-    cart.push(bookId)
-
-    localStorage.setItem('cart', JSON.stringify(cart))
-  }
-
   return (
     <Layout>
       <Content>
         <Row gutter={10}>
           {isLoading && <Loader />}
+          {payload && payload.length === 0 && <Title>Книг пока нет</Title>}
           {payload &&
             payload.length > 0 &&
             payload.map((book) => (
               <Col span={6} key={book.id}>
                 <Card title={book.name}>
+                  <StyledRow justify="center">
+                    <Image
+                      src={book.image}
+                      height={300}
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </StyledRow>
                   <StyledRow>
                     <Text strong>Издательство: </Text> {book.publisher}
                   </StyledRow>

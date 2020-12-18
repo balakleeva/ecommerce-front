@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Layout from '../../Components/Layout'
 import useRequest from '../../Utils/useRequest'
 import BookService from '../../Services/BookService'
 import { useParams } from 'react-router-dom'
 import Title from 'antd/lib/typography/Title'
-import { Col, Row } from 'antd'
+import { Button, Col, Image, Row } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import Loader from '../../Components/Loader'
+import { Content, StyledRow } from '../../Components/StyledComponents'
+import ClientAuthContext from '../../Contexts/ClientContext'
+import { handleAddToCart } from '../../Utils/cart'
 
 const Book = () => {
   const { bookId } = useParams()
@@ -20,34 +23,50 @@ const Book = () => {
     fetch(bookId)
   }, [])
 
+  const { isAuth } = useContext(ClientAuthContext)
+
   return (
     <Layout>
-      {isLoading && <Loader />}
-      {!isLoading && payload && (
-        <Row justify="center">
-          <Col span={12}>
-            <Row justify="center">
-              <Title>{payload.name}</Title>
-            </Row>
+      <Content>
+        {isLoading && <Loader />}
+        {!isLoading && payload && (
+          <StyledRow justify="center">
+            <Col span={12}>
+              <StyledRow justify="center">
+                <Image style={{ objectFit: 'contain' }} src={payload.image} />
+              </StyledRow>
 
-            <Row justify="center">
-              <Text strong>Жанр: </Text> {payload.genre.name}
-            </Row>
+              <StyledRow justify="center">
+                <Title>{payload.name}</Title>
+              </StyledRow>
 
-            <Row justify="center">
-              <Text strong>Тип: </Text> {payload.genre.genreType}
-            </Row>
+              <StyledRow justify="center">
+                <Text strong>Жанр: </Text> {payload.genre.name}
+              </StyledRow>
 
-            <Row justify="center">
-              <Text strong>Издательство: </Text> {payload.publisher}
-            </Row>
+              <StyledRow justify="center">
+                <Text strong>Тип: </Text> {payload.genre.genreType}
+              </StyledRow>
 
-            <Row justify="center">
-              <Text strong>Год выпуска: </Text> {payload.publishYear}
-            </Row>
-          </Col>
-        </Row>
-      )}
+              <StyledRow justify="center">
+                <Text strong>Издательство: </Text> {payload.publisher}
+              </StyledRow>
+
+              <StyledRow justify="center">
+                <Text strong>Год выпуска: </Text> {payload.publishYear}
+              </StyledRow>
+
+              {isAuth && (
+                <Row>
+                  <Button block onClick={() => handleAddToCart(payload.id)}>
+                    Добавить в корзину
+                  </Button>
+                </Row>
+              )}
+            </Col>
+          </StyledRow>
+        )}
+      </Content>
     </Layout>
   )
 }
