@@ -3,7 +3,6 @@ import Layout from '../../../Components/Admin/Layout'
 import useRequest from '../../../Utils/useRequest'
 import { Button, Row, Table } from 'antd'
 import { Link } from 'react-router-dom'
-import { Content } from '../../../Components/StyledComponents'
 import Loader from '../../../Components/Loader'
 import styled from 'styled-components'
 import AdminService from '../../../Services/AdminService'
@@ -57,10 +56,8 @@ const Authors = () => {
       <Button>
         <Link to="/admin/add-staff">+ Добавить сотрудника</Link>
       </Button>
-      <Content>
-        {isLoading && <Loader />}
-        {payload && <Table dataSource={payload} columns={columns} />}
-      </Content>
+      {isLoading && <Loader />}
+      {payload && <Table dataSource={payload} columns={columns} />}
     </Layout>
   )
 }

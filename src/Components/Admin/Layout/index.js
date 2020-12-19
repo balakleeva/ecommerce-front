@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { Col, Layout as AntLayout, Menu, Row } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import AdminAuthContext from '../../../Contexts/AdminContext'
+import { Content as ShopContent } from '../../StyledComponents'
 
 const { Header, Content, Footer } = AntLayout
 
@@ -35,6 +36,9 @@ const Layout = ({ children }) => {
                   <Menu.Item key="4">
                     <Link to="/admin/authors">Авторы</Link>
                   </Menu.Item>
+                  <Menu.Item key="7">
+                    <Link to="/admin/purchases">Покупки</Link>
+                  </Menu.Item>
                   {adminInfo.role === 'директор' && (
                     <Menu.Item key="6">
                       <Link to="/admin/staff">Сотрудники</Link>
@@ -57,7 +61,9 @@ const Layout = ({ children }) => {
         </Row>
       </Header>
 
-      <Content>{children}</Content>
+      <Content>
+        <ShopContent>{children}</ShopContent>
+      </Content>
 
       <Footer>footer</Footer>
     </AntLayout>

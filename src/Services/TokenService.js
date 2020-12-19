@@ -14,7 +14,6 @@ class TokenService {
     }
   }
 
-
   getToken() {
     return localStorage.getItem(this.lsKey) || null;
   }

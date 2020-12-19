@@ -3,7 +3,6 @@ import Layout from '../../../Components/Admin/Layout'
 import useRequest from '../../../Utils/useRequest'
 import { Button, Row, Table } from 'antd'
 import { Link } from 'react-router-dom'
-import { Content } from '../../../Components/StyledComponents'
 import Loader from '../../../Components/Loader'
 import styled from 'styled-components'
 import AuthorService from '../../../Services/AuthorService'
@@ -54,13 +53,11 @@ const Authors = () => {
 
   return (
     <Layout>
-      <Button>
+      <Button style={{ marginBottom: '10px' }}>
         <Link to="/admin/add-author">+ Добавить автора</Link>
       </Button>
-      <Content>
-        {isLoading && <Loader />}
-        {payload && <Table dataSource={payload} columns={columns} />}
-      </Content>
+      {isLoading && <Loader />}
+      {payload && <Table dataSource={payload} columns={columns} />}
     </Layout>
   )
 }

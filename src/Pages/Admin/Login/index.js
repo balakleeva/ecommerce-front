@@ -13,7 +13,7 @@ const Login = () => {
 
   return (
     <Layout>
-      <Row justify="center" style={{ marginTop: '1rem' }}>
+      <Row justify="center">
         <Card>
           <Formik
             initialValues={{

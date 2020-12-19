@@ -1,6 +1,5 @@
 import React from 'react'
 import Layout from '../../../Components/Admin/Layout'
-import { Content } from '../../../Components/StyledComponents'
 import BookService from '../../../Services/BookService'
 import { useHistory } from 'react-router-dom'
 import BookForm from '../../../Components/Forms/Admin/BookForm'
@@ -25,9 +24,7 @@ const AddBook = () => {
 
   return (
     <Layout>
-      <Content>
-        <BookForm initValues={initValues} onSubmit={handleSubmit} />
-      </Content>
+      <BookForm initValues={initValues} onSubmit={handleSubmit} />
     </Layout>
   )
 }

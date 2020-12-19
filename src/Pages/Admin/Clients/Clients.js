@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
-import Layout from '../../Components/Admin/Layout'
-import useRequest from '../../Utils/useRequest'
-import ClientService from '../../Services/ClientService'
-import { Button, Table, Col } from 'antd'
-import Title from 'antd/lib/typography/Title'
+import Layout from '../../../Components/Admin/Layout'
+import useRequest from '../../../Utils/useRequest'
+import ClientService from '../../../Services/ClientService'
+import { Button, Table } from 'antd'
 import { Link } from 'react-router-dom'
-import { Content, StyledRow } from '../../Components/StyledComponents'
+import Loader from '../../../Components/Loader'
 
 const Clients = () => {
   const {
@@ -51,19 +50,11 @@ const Clients = () => {
 
   return (
     <Layout>
-      <StyledRow justify="center">
-        <Col span={2} offset={10}>
-          <Title level={3}>Клиенты</Title>
-        </Col>
-        <Col span={2} offset={9}>
-          <Button>
-            <Link to="/admin/add-client">+ Добавить клиента</Link>
-          </Button>
-        </Col>
-      </StyledRow>
-      <Content>
-        <Table dataSource={payload} columns={columns} />
-      </Content>
+      {/*<Button style={{ marginBottom: '10px' }}>*/}
+      {/*  <Link to="/admin/add-client">+ Добавить клиента</Link>*/}
+      {/*</Button>*/}
+      {isLoading && <Loader />}
+      {payload && <Table dataSource={payload} columns={columns} />}
     </Layout>
   )
 }

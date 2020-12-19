@@ -11,24 +11,40 @@ import useRequest from '../../Utils/useRequest'
 import BookService from '../../Services/BookService'
 import { handleRemoveFromCart } from '../../Utils/cart'
 import Loader from '../../Components/Loader'
+import PurchaseService from '../../Services/PurchaseService'
+import { useHistory } from 'react-router-dom'
 
 const Cart = () => {
+  const { push } = useHistory()
   const {
     fetch,
     state: { error, isLoading, payload },
   } = useRequest(BookService.getByIds)
 
+  const ids = localStorage.cart && JSON.parse(localStorage.cart)
+
   useEffect(() => {
-    const ids = JSON.parse(localStorage.cart)
-    console.log('aassaa', ids)
-    fetch({ ids })
+    if (ids && ids.length > 0) {
+      fetch({ ids })
+    }
   }, [])
+
+  const handlePurchase = () => {
+    PurchaseService.create({
+      bookIds: payload.map((book) => book.id),
+    }).then(() => {
+      localStorage.removeItem('cart')
+      push('/')
+    })
+  }
 
   return (
     <Layout>
       <Content>
         {isLoading && <Loader />}
-        {payload && payload.length === 0 && <Title>Ваша корзина пуста</Title>}
+        {(!ids || ids.length === 0 || (payload && payload.length === 0)) && (
+          <Title>Ваша корзина пуста</Title>
+        )}
         {payload && payload.length > 0 && (
           <>
             {payload.map((book) => (
@@ -51,12 +67,17 @@ const Cart = () => {
               </StyledRow>
             ))}
             <StyledRow style={{ marginTop: '10px' }}>
-              <Button type="primary" size="large" block>
+              <Button
+                type="primary"
+                size="large"
+                block
+                onClick={handlePurchase}
+              >
                 Купить книги
               </Button>
             </StyledRow>
 
-            <StyledRow style={{ marginTop: '10px' }}>
+            <StyledRow>
               <Button type="primary" size="large" block>
                 Взять книги в аренду
               </Button>

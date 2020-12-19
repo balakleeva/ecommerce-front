@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
   return (
     <AntLayout style={{ height: '100%' }}>
       <Header>
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
           <Menu.Item key="1">
             <Link to="/">Главная</Link>
           </Menu.Item>

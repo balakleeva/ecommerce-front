@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Route, Redirect } from 'react-router-dom'
+import AdminAuthContext from '../Contexts/AdminContext'
 
 const AdminRoute = ({ component: Component, ...rest }) => {
-	const token = localStorage.clientToken
-	return (
-		<Route
-			{...rest}
-			render={(props) =>
-				token ? <Component {...props} /> : <Redirect to="/login" />
-			}
-		/>
-	)
+  const { isAuth } = useContext(AdminAuthContext)
+
+  console.log('isAuth', isAuth)
+  if (!isAuth) {
+    return <Redirect to="/admin/login" />
+  }
+
+  return <Route {...rest} render={(props) => <Component {...props} />} />
 }
 
 export default AdminRoute

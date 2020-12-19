@@ -17,7 +17,7 @@ const ClientApp = () => {
 
   const contextValue = {
     clientInfo,
-    isAuth: !!clientInfo.token,
+    isAuth: clientInfo && !!clientInfo.token,
     setClient: (value) => setClient(value),
   }
 

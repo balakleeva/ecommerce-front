@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router-dom'
 import { default as AdminLogin } from '../Pages/Admin/Login'
-import Clients from '../Pages/Admin/Clients'
+import Clients from '../Pages/Admin/Clients/Clients'
 import Books from '../Pages/Admin/Books/Books'
 import AddBook from '../Pages/Admin/Books/AddBook'
 import EditBook from '../Pages/Admin/Books/EditBook'
@@ -13,6 +13,10 @@ import Staff from '../Pages/Admin/Staff/Staff'
 import AddStaff from '../Pages/Admin/Staff/AddStaff'
 import jwtDecode from 'jwt-decode'
 import AdminAuthContext from '../Contexts/AdminContext'
+import AdminRoute from '../HOCs/AdminRoute'
+import Purchases from '../Pages/Admin/Purchases/Purchases'
+import Purchase from '../Pages/Admin/Purchases/Purchase'
+import AddPurchase from '../Pages/Admin/Purchases/AddPurchase'
 
 const AdminApp = () => {
   const token = localStorage.adminToken
@@ -51,40 +55,49 @@ const AdminApp = () => {
         <Route path="/admin/login" exact>
           <AdminLogin />
         </Route>
-        <Route path="/admin/clients" exact>
+        <AdminRoute path="/admin/clients" exact>
           <Clients />
-        </Route>
-        <Route path="/admin/books" exact>
+        </AdminRoute>
+        <AdminRoute path="/admin/books" exact>
           <Books />
-        </Route>
-        <Route path="/admin/add-book" exact>
+        </AdminRoute>
+        <AdminRoute path="/admin/add-book" exact>
           <AddBook />
-        </Route>
-        <Route path="/admin/edit-book/:bookId" exact>
+        </AdminRoute>
+        <AdminRoute path="/admin/edit-book/:bookId" exact>
           <EditBook />
-        </Route>
+        </AdminRoute>
 
-        <Route path="/admin/genres" exact>
+        <AdminRoute path="/admin/genres" exact>
           <Genres />
-        </Route>
-        <Route path="/admin/add-genre" exact>
+        </AdminRoute>
+        <AdminRoute path="/admin/add-genre" exact>
           <AddGenre />
-        </Route>
+        </AdminRoute>
 
-        <Route path="/admin/authors" exact>
+        <AdminRoute path="/admin/authors" exact>
           <Authors />
-        </Route>
-        <Route path="/admin/add-author" exact>
+        </AdminRoute>
+        <AdminRoute path="/admin/add-author" exact>
           <AddAuthor />
-        </Route>
+        </AdminRoute>
 
-        <Route path="/admin/staff" exact>
+        <AdminRoute path="/admin/staff" exact>
           <Staff />
-        </Route>
-
-        <Route path="/admin/add-staff" exact>
+        </AdminRoute>
+        <AdminRoute path="/admin/add-staff" exact>
           <AddStaff />
-        </Route>
+        </AdminRoute>
+
+        <AdminRoute path="/admin/purchases" exact>
+          <Purchases />
+        </AdminRoute>
+        <AdminRoute path="/admin/add-purchase" exact>
+          <AddPurchase />
+        </AdminRoute>
+        <AdminRoute path="/admin/purchases/:purchaseId" exact>
+          <Purchase />
+        </AdminRoute>
       </Switch>
     </AdminAuthContext.Provider>
   )

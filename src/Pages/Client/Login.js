@@ -3,12 +3,13 @@ import Layout from '../../Components/Layout'
 import { Button, Card, Col, Input, Row } from 'antd'
 
 import { Formik, Form, Field } from 'formik'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { StyledRow } from '../../Components/StyledComponents'
 import ClientService from '../../Services/ClientService'
 import ClientAuthContext from '../../Contexts/ClientContext'
 
 const Login = () => {
+  const { push } = useHistory()
   const { setClient } = useContext(ClientAuthContext)
 
   return (
@@ -27,6 +28,8 @@ const Login = () => {
                   setClient({
                     token: response,
                   })
+
+                  push('/')
                 })
               }}
             >

@@ -3,14 +3,9 @@ import Layout from '../../../Components/Admin/Layout'
 import useRequest from '../../../Utils/useRequest'
 import { Button, Row, Table } from 'antd'
 import { Link } from 'react-router-dom'
-import { Content } from '../../../Components/StyledComponents'
+import { StyledButton } from '../../../Components/StyledComponents'
 import Loader from '../../../Components/Loader'
-import styled from 'styled-components'
 import GenreService from '../../../Services/GenreService'
-
-const StyledButton = styled(Button)`
-  margin-right: 10px;
-`
 
 const Genres = () => {
   const {
@@ -54,13 +49,11 @@ const Genres = () => {
 
   return (
     <Layout>
-      <Button>
+      <Button style={{ marginBottom: '10px' }}>
         <Link to="/admin/add-genre">+ Добавить жанр</Link>
       </Button>
-      <Content>
-        {isLoading && <Loader />}
-        {payload && <Table dataSource={payload} columns={columns} />}
-      </Content>
+      {isLoading && <Loader />}
+      {payload && <Table dataSource={payload} columns={columns} />}
     </Layout>
   )
 }

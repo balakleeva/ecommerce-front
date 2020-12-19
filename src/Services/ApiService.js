@@ -31,8 +31,11 @@ class ApiService {
     const headers = options.headers || {};
     headers['X-Requested-With'] = 'XMLHttpRequest';
 
-    if (this.ts.hasToken()) {
-      headers['Authorization'] = this.ts.getToken();
+    if (localStorage.adminToken) {
+      headers['admin-authorization'] = localStorage.adminToken;
+    }
+    if (localStorage.clientToken) {
+      headers['client-authorization'] = localStorage.clientToken;
     }
 
     for (let headerKey in (options.headers || {})) {
@@ -60,9 +63,9 @@ class ApiService {
         return Promise.all([result, resp.status]);
       })
       .then(([data, status]) => {
-        if (status === 401) {
-          this.ts.removeToken();
-        }
+        // if (status === 401) {
+        //   this.ts.removeToken();
+        // }
 
         if (status >= 500 || [400, 401, 402, 403, 404].includes(status)) {
           return Promise.reject(data.error || data);
