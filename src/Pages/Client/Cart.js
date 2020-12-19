@@ -5,7 +5,7 @@ import {
   StyledCard,
   StyledRow,
 } from '../../Components/StyledComponents'
-import { Button, Col, Row } from 'antd'
+import { Button, Col, notification, Row } from 'antd'
 import Title from 'antd/lib/typography/Title'
 import useRequest from '../../Utils/useRequest'
 import BookService from '../../Services/BookService'
@@ -13,6 +13,7 @@ import { handleRemoveFromCart } from '../../Utils/cart'
 import Loader from '../../Components/Loader'
 import PurchaseService from '../../Services/PurchaseService'
 import { useHistory } from 'react-router-dom'
+import RentService from '../../Services/RentService'
 
 const Cart = () => {
   const { push } = useHistory()
@@ -24,6 +25,7 @@ const Cart = () => {
   const ids = localStorage.cart && JSON.parse(localStorage.cart)
 
   useEffect(() => {
+    console.log('---dsadas', ids)
     if (ids && ids.length > 0) {
       fetch({ ids })
     }
@@ -32,10 +34,43 @@ const Cart = () => {
   const handlePurchase = () => {
     PurchaseService.create({
       bookIds: payload.map((book) => book.id),
-    }).then(() => {
-      localStorage.removeItem('cart')
-      push('/')
     })
+      .then(() => {
+        localStorage.removeItem('cart')
+        push('/')
+
+        notification.success({
+          message: 'Покупка успешно совершена',
+          placement: 'bottomRight',
+        })
+      })
+      .catch((err) =>
+        notification.error({
+          message: err.message,
+          placement: 'bottomRight',
+        })
+      )
+  }
+
+  const handleRent = () => {
+    RentService.create({
+      bookIds: payload.map((book) => book.id),
+    })
+      .then(() => {
+        localStorage.removeItem('cart')
+        push('/')
+
+        notification.success({
+          message: 'Аренда успешно оформлена',
+          placement: 'bottomRight',
+        })
+      })
+      .catch((err) =>
+        notification.error({
+          message: err.message,
+          placement: 'bottomRight',
+        })
+      )
   }
 
   return (
@@ -78,7 +113,7 @@ const Cart = () => {
             </StyledRow>
 
             <StyledRow>
-              <Button type="primary" size="large" block>
+              <Button type="primary" size="large" block onClick={handleRent}>
                 Взять книги в аренду
               </Button>
             </StyledRow>

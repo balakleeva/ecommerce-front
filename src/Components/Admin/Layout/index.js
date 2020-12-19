@@ -5,7 +5,7 @@ import Text from 'antd/lib/typography/Text'
 import AdminAuthContext from '../../../Contexts/AdminContext'
 import { Content as ShopContent } from '../../StyledComponents'
 
-const { Header, Content, Footer } = AntLayout
+const { Header, Content } = AntLayout
 
 const Layout = ({ children }) => {
   const { push } = useHistory()
@@ -39,6 +39,9 @@ const Layout = ({ children }) => {
                   <Menu.Item key="7">
                     <Link to="/admin/purchases">Покупки</Link>
                   </Menu.Item>
+                  <Menu.Item key="8">
+                    <Link to="/admin/rents">Аренды</Link>
+                  </Menu.Item>
                   {adminInfo.role === 'директор' && (
                     <Menu.Item key="6">
                       <Link to="/admin/staff">Сотрудники</Link>
@@ -64,8 +67,6 @@ const Layout = ({ children }) => {
       <Content>
         <ShopContent>{children}</ShopContent>
       </Content>
-
-      <Footer>footer</Footer>
     </AntLayout>
   )
 }

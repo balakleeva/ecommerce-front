@@ -1,24 +1,35 @@
 import React, { useEffect } from 'react'
-import { Button, Row, Table } from 'antd'
+import { Button, notification, Row, Table } from 'antd'
 import { Link } from 'react-router-dom'
 import { StyledButton } from '../../../Components/StyledComponents'
 import Loader from '../../../Components/Loader'
 import Layout from '../../../Components/Admin/Layout'
 import useRequest from '../../../Utils/useRequest'
-import PurchaseService from '../../../Services/PurchaseService'
 import moment from 'moment'
+import RentService from '../../../Services/RentService'
 
-const Purchases = () => {
+const Rents = () => {
   const {
     fetch,
     state: { error, isLoading, payload },
-  } = useRequest(PurchaseService.getAll)
+  } = useRequest(RentService.getAll)
 
   useEffect(() => {
     fetch()
   }, [])
 
   console.log('pay', payload)
+
+  const handleReturn = (rentId) => {
+    RentService.updateReturn(rentId).then(() => {
+      notification.success({
+        message: 'Аренда завершена',
+        placement: 'bottomRight',
+      })
+
+      fetch()
+    })
+  }
 
   const columns = [
     {
@@ -37,16 +48,28 @@ const Purchases = () => {
       dataIndex: ['client', 'name'],
     },
     {
-      title: 'Сумма покупки',
-      key: 'buySum',
-      dataIndex: 'buySum',
+      title: 'Сумма аренды',
+      key: 'rentSum',
+      dataIndex: 'rentSum',
     },
     {
-      title: 'Дата',
+      title: 'Дата взятия',
       key: 'date',
       render: (record) => (
         <span>{moment(record.createdAt).format('DD-MM-YYYY')}</span>
       ),
+    },
+    {
+      title: 'Дата возврата',
+      key: 'date',
+      render: (record) => (
+        <span>{moment(record.returnDate).format('DD-MM-YYYY')}</span>
+      ),
+    },
+    {
+      title: 'Возращено',
+      key: 'isRetured',
+      render: (record) => <span>{record.isReturned ? 'Да' : 'Нет'}</span>,
     },
     {
       title: '',
@@ -55,7 +78,10 @@ const Purchases = () => {
       render: (record) => (
         <Row>
           <StyledButton>
-            <Link to={`/admin/purchases/${record.id}`}>Подробнее</Link>
+            <Link to={`/admin/rents/${record.id}`}>Подробнее</Link>
+          </StyledButton>
+          <StyledButton onClick={() => handleReturn(record.id)}>
+            Отметить возврат
           </StyledButton>
         </Row>
       ),
@@ -65,7 +91,7 @@ const Purchases = () => {
   return (
     <Layout>
       <Button style={{ marginBottom: '10px' }}>
-        <Link to="/admin/add-purchase">+ Добавить покупку</Link>
+        <Link to="/admin/add-rent">+ Добавить аренду</Link>
       </Button>
       {isLoading && <Loader />}
       {payload && <Table dataSource={payload} columns={columns} />}
@@ -73,4 +99,4 @@ const Purchases = () => {
   )
 }
 
-export default Purchases
+export default Rents

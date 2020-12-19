@@ -2,21 +2,21 @@ import React, { useEffect } from 'react'
 import Layout from '../../../Components/Admin/Layout'
 import { StyledRow } from '../../../Components/StyledComponents'
 import useRequest from '../../../Utils/useRequest'
-import PurchaseService from '../../../Services/PurchaseService'
 import { useParams } from 'react-router-dom'
 import Loader from '../../../Components/Loader'
 import { Card, Col, Row, Table } from 'antd'
 import Text from 'antd/lib/typography/Text'
+import RentService from '../../../Services/RentService'
 
-const Purchase = () => {
-  const { purchaseId } = useParams()
+const Rent = () => {
+  const { rentId } = useParams()
   const {
     fetch,
     state: { error, isLoading, payload },
-  } = useRequest(PurchaseService.getOne)
+  } = useRequest(RentService.getOne)
 
   useEffect(() => {
-    fetch(purchaseId)
+    fetch(rentId)
   }, [])
 
   const columns = [
@@ -41,9 +41,9 @@ const Purchase = () => {
       dataIndex: 'publishYear',
     },
     {
-      title: 'Цена продажи',
-      key: 'buyPrice',
-      dataIndex: 'buyPrice',
+      title: 'Цена аренды',
+      key: 'rentPrice',
+      dataIndex: 'rentPrice',
     },
   ]
 
@@ -95,4 +95,4 @@ const Purchase = () => {
   )
 }
 
-export default Purchase
+export default Rent

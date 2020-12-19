@@ -23,9 +23,9 @@ function AuthorSelector({ value, onChange, className }) {
       {payload && (
         <StyledSelect onChange={onChange} value={value}>
           {payload &&
-            payload.map(({ id, name, genreType }) => (
+            payload.map(({ id, name }) => (
               <Option key={id} value={id}>
-                {name} - {genreType}
+                {name}
               </Option>
             ))}
         </StyledSelect>

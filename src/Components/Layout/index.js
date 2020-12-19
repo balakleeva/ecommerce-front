@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Layout as AntLayout, Menu } from 'antd'
 import ClientAuthContext from '../../Contexts/ClientContext'
 
-const { Header, Content, Footer } = AntLayout
+const { Header, Content } = AntLayout
 
 const Layout = ({ children }) => {
   const { isAuth, setClient } = useContext(ClientAuthContext)
@@ -36,8 +36,6 @@ const Layout = ({ children }) => {
       </Header>
 
       <Content>{children}</Content>
-
-      <Footer>footer</Footer>
     </AntLayout>
   )
 }

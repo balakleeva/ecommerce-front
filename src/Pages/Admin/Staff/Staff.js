@@ -53,7 +53,7 @@ const Authors = () => {
 
   return (
     <Layout>
-      <Button>
+      <Button style={{ marginBottom: '10px' }}>
         <Link to="/admin/add-staff">+ Добавить сотрудника</Link>
       </Button>
       {isLoading && <Loader />}

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import Layout from '../../../Components/Admin/Layout'
-import { Button, Card, Input, Row } from 'antd'
+import { Button, Card, Col, Input, notification, Row } from 'antd'
 import { Field, Form, Formik } from 'formik'
 import { StyledRow } from '../../../Components/StyledComponents'
 import AdminService from '../../../Services/AdminService'
@@ -14,48 +14,60 @@ const Login = () => {
   return (
     <Layout>
       <Row justify="center">
-        <Card>
-          <Formik
-            initialValues={{
-              login: '',
-              password: '',
-            }}
-            onSubmit={(values) => {
-              AdminService.auth(values).then((response) => {
-                handleLogin(response)
-                push('/admin/books')
-              })
-            }}
-          >
-            {() => (
-              <Form>
-                <StyledRow>
-                  <Field name="login">
-                    {({ field }) => (
-                      <Input
-                        type="text"
-                        placeholder="Введите логин"
-                        {...field}
-                      />
-                    )}
-                  </Field>
-                </StyledRow>
+        <Col span={10}>
+          <Card>
+            <Formik
+              initialValues={{
+                login: '',
+                password: '',
+              }}
+              onSubmit={(values) => {
+                AdminService.auth(values)
+                  .then((response) => {
+                    handleLogin(response)
+                    push('/admin/books')
+                  })
+                  .catch((err) =>
+                    notification.error({
+                      message: err.message,
+                      placement: 'bottomRight',
+                    })
+                  )
+              }}
+            >
+              {() => (
+                <Form>
+                  <StyledRow>
+                    <Field name="login">
+                      {({ field }) => (
+                        <Input
+                          type="text"
+                          placeholder="Введите логин"
+                          {...field}
+                        />
+                      )}
+                    </Field>
+                  </StyledRow>
 
-                <StyledRow>
-                  <Field name="password">
-                    {({ field }) => (
-                      <Input.Password placeholder="Введите пароль" {...field} />
-                    )}
-                  </Field>
-                </StyledRow>
+                  <StyledRow>
+                    <Field name="password">
+                      {({ field }) => (
+                        <Input.Password
+                          placeholder="Введите пароль"
+                          {...field}
+                        />
+                      )}
+                    </Field>
+                  </StyledRow>
 
-                <Button block htmlType="submit">
-                  Войти
-                </Button>
-              </Form>
-            )}
-          </Formik>
-        </Card>
+                  <Button block htmlType="submit">
+                    Войти
+                  </Button>
+                </Form>
+              )}
+            </Formik>
+          </Card>
+        </Col>
       </Row>
     </Layout>
   )

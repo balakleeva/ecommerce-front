@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import Layout from '../../Components/Layout'
-import { Button, Card, Col, Input, Row } from 'antd'
+import { Button, Card, Col, Input, notification, Row } from 'antd'
 
 import { Formik, Form, Field } from 'formik'
 import { Link, useHistory } from 'react-router-dom'
@@ -23,14 +23,21 @@ const Login = () => {
                 password: '',
               }}
               onSubmit={(values) => {
-                ClientService.login(values).then((response) => {
-                  localStorage.setItem('clientToken', response)
-                  setClient({
-                    token: response,
-                  })
+                ClientService.login(values)
+                  .then((response) => {
+                    localStorage.setItem('clientToken', response)
+                    setClient({
+                      token: response,
+                    })
 
-                  push('/')
-                })
+                    push('/')
+                  })
+                  .catch((err) =>
+                    notification.error({
+                      message: err.message,
+                      placement: 'bottomRight',
+                    })
+                  )
               }}
             >
               {() => (
@@ -66,12 +73,12 @@ const Login = () => {
               )}
             </Formik>
 
-            <StyledRow justify="center">
+            <Row justify="center" style={{ marginTop: '10px' }}>
               Нет аккаунта?{' '}
               <Link to="/registration" style={{ marginLeft: '5px' }}>
                 Регистрация
               </Link>
-            </StyledRow>
+            </Row>
           </Card>
         </Col>
       </Row>

@@ -17,6 +17,9 @@ import AdminRoute from '../HOCs/AdminRoute'
 import Purchases from '../Pages/Admin/Purchases/Purchases'
 import Purchase from '../Pages/Admin/Purchases/Purchase'
 import AddPurchase from '../Pages/Admin/Purchases/AddPurchase'
+import Rents from '../Pages/Admin/Rents/Rents'
+import AddRent from '../Pages/Admin/Rents/AddRent'
+import Rent from '../Pages/Admin/Rents/Rent'
 
 const AdminApp = () => {
   const token = localStorage.adminToken
@@ -97,6 +100,16 @@ const AdminApp = () => {
         </AdminRoute>
         <AdminRoute path="/admin/purchases/:purchaseId" exact>
           <Purchase />
+        </AdminRoute>
+
+        <AdminRoute path="/admin/rents" exact>
+          <Rents />
+        </AdminRoute>
+        <AdminRoute path="/admin/add-rent" exact>
+          <AddRent />
+        </AdminRoute>
+        <AdminRoute path="/admin/rents/:rentId" exact>
+          <Rent />
         </AdminRoute>
       </Switch>
     </AdminAuthContext.Provider>
