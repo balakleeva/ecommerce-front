@@ -19,4 +19,7 @@ export default {
   getByIds(data) {
     return ApiService.get('/book/byIds', data)
   },
+  search(data) {
+    return ApiService.get('/book/search', data)
+  }
 }

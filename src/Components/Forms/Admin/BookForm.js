@@ -90,7 +90,11 @@ const BookForm = ({ initValues, onSubmit }) => {
                 <Col span={24}>
                   <Row>Цена покупки:</Row>
                   <Row>
-                    <Input type="number" placeholder="Введите цену продажи" {...field} />
+                    <Input
+                      type="number"
+                      placeholder="Введите цену продажи"
+                      {...field}
+                    />
                   </Row>
                 </Col>
               )}
@@ -103,7 +107,28 @@ const BookForm = ({ initValues, onSubmit }) => {
                 <Col span={24}>
                   <Row>Цена аренды:</Row>
                   <Row>
-                    <Input type="number" placeholder="Введите цену аренды" {...field} />
+                    <Input
+                      type="number"
+                      placeholder="Введите цену аренды"
+                      {...field}
+                    />
+                  </Row>
+                </Col>
+              )}
+            </Field>
+          </StyledRow>
+
+          <StyledRow>
+            <Field name="quantity">
+              {({ field }) => (
+                <Col span={24}>
+                  <Row>Количество:</Row>
+                  <Row>
+                    <Input
+                      placeholder="Введите количество"
+                      type="number"
+                      {...field}
+                    />
                   </Row>
                 </Col>
               )}

@@ -37,6 +37,7 @@ const AddBook = () => {
             image: payload.image,
             buyPrice: payload.buyPrice,
             rentPrice: payload.rentPrice,
+            quantity: payload.quantity,
           }}
           onSubmit={handleSubmit}
         />

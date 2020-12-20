@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, notification, Row, Table } from 'antd'
 import { Link } from 'react-router-dom'
 import { StyledButton } from '../../../Components/StyledComponents'
@@ -7,8 +7,11 @@ import Layout from '../../../Components/Admin/Layout'
 import useRequest from '../../../Utils/useRequest'
 import moment from 'moment'
 import RentService from '../../../Services/RentService'
+import RentSearch from '../../../Components/Forms/Admin/RentSearch'
 
 const Rents = () => {
+  const [rents, setRents] = useState(null)
+
   const {
     fetch,
     state: { error, isLoading, payload },
@@ -17,8 +20,6 @@ const Rents = () => {
   useEffect(() => {
     fetch()
   }, [])
-
-  console.log('pay', payload)
 
   const handleReturn = (rentId) => {
     RentService.updateReturn(rentId).then(() => {
@@ -29,6 +30,14 @@ const Rents = () => {
 
       fetch()
     })
+  }
+
+  useEffect(() => {
+    setRents(payload)
+  }, [payload])
+
+  const handleSearch = (values) => {
+    RentService.search(values).then((response) => setRents(response))
   }
 
   const columns = [
@@ -68,7 +77,7 @@ const Rents = () => {
     },
     {
       title: 'Возращено',
-      key: 'isRetured',
+      key: 'isReturned',
       render: (record) => <span>{record.isReturned ? 'Да' : 'Нет'}</span>,
     },
     {
@@ -80,7 +89,10 @@ const Rents = () => {
           <StyledButton>
             <Link to={`/admin/rents/${record.id}`}>Подробнее</Link>
           </StyledButton>
-          <StyledButton onClick={() => handleReturn(record.id)}>
+          <StyledButton
+            onClick={() => handleReturn(record.id)}
+            disabled={record.isReturned}
+          >
             Отметить возврат
           </StyledButton>
         </Row>
@@ -93,8 +105,9 @@ const Rents = () => {
       <Button style={{ marginBottom: '10px' }}>
         <Link to="/admin/add-rent">+ Добавить аренду</Link>
       </Button>
+      <RentSearch handleSearch={handleSearch} />
       {isLoading && <Loader />}
-      {payload && <Table dataSource={payload} columns={columns} />}
+      {rents && <Table dataSource={rents} columns={columns} />}
     </Layout>
   )
 }

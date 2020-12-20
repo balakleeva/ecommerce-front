@@ -16,4 +16,7 @@ export default {
   updateReturn(rentId) {
     return ApiService.put(`/rent/${rentId}`)
   },
+  search(data) {
+    return ApiService.get('/rent/search', data)
+  },
 }

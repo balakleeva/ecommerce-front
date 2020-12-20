@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../../Components/Admin/Layout'
 import useRequest from '../../../Utils/useRequest'
 import { Button, Row, Table } from 'antd'
@@ -6,12 +6,15 @@ import { Link } from 'react-router-dom'
 import Loader from '../../../Components/Loader'
 import styled from 'styled-components'
 import AdminService from '../../../Services/AdminService'
+import StaffSearch from '../../../Components/Forms/Admin/StaffSearch'
 
 const StyledButton = styled(Button)`
   margin-right: 10px;
 `
 
-const Authors = () => {
+const Staff = () => {
+  const [staff, setStaff] = useState(null)
+
   const {
     fetch,
     state: { error, isLoading, payload },
@@ -20,6 +23,10 @@ const Authors = () => {
   useEffect(() => {
     fetch()
   }, [])
+
+  useEffect(() => {
+    setStaff(payload)
+  }, [payload])
 
   const columns = [
     {
@@ -51,15 +58,20 @@ const Authors = () => {
     },
   ]
 
+  const handleSearch = (values) => {
+    AdminService.search(values).then((response) => setStaff(response))
+  }
+
   return (
     <Layout>
       <Button style={{ marginBottom: '10px' }}>
         <Link to="/admin/add-staff">+ Добавить сотрудника</Link>
       </Button>
+      <StaffSearch handleSearch={handleSearch} />
       {isLoading && <Loader />}
-      {payload && <Table dataSource={payload} columns={columns} />}
+      {staff && <Table dataSource={staff} columns={columns} />}
     </Layout>
   )
 }
 
-export default Authors
+export default Staff

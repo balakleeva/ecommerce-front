@@ -6,7 +6,7 @@ import BookService from '../../Services/BookService'
 
 const { Option } = Select
 
-function ClientSelector({ value, onChange, className }) {
+function MultipleBookSelector({ value, onChange, className }) {
   const {
     fetch,
     state: { error, isLoading, payload },
@@ -34,4 +34,4 @@ function ClientSelector({ value, onChange, className }) {
   )
 }
 
-export default ClientSelector
+export default MultipleBookSelector

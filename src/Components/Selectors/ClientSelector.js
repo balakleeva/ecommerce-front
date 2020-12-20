@@ -6,7 +6,7 @@ import ClientService from '../../Services/ClientService'
 
 const { Option } = Select
 
-function ClientSelector({ value, onChange, className }) {
+function ClientSelector({ value, onChange, className, multiple = false }) {
   const {
     fetch,
     state: { error, isLoading, payload },
@@ -21,7 +21,11 @@ function ClientSelector({ value, onChange, className }) {
       {error && <div>{JSON.stringify(error)}</div>}
       {isLoading && <div>loader</div>}
       {payload && (
-        <StyledSelect onChange={onChange} value={value}>
+        <StyledSelect
+          onChange={onChange}
+          value={value}
+          mode={multiple ? 'multiple' : 'default'}
+        >
           {payload &&
             payload.map(({ id, name }) => (
               <Option key={id} value={id}>

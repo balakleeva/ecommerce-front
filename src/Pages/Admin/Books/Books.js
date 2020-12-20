@@ -55,6 +55,11 @@ const Books = () => {
       dataIndex: 'rentPrice',
     },
     {
+      title: 'Количество',
+      key: 'quantity',
+      dataIndex: 'quantity',
+    },
+    {
       title: '',
       key: 'action',
       width: '100',

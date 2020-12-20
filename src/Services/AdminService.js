@@ -10,4 +10,7 @@ export default {
   auth(data) {
     return ApiService.post('/admin/auth', data)
   },
+  search(data) {
+    return ApiService.get('/admin/search', data)
+  }
 }

@@ -20,6 +20,7 @@ const AddBook = () => {
     image: '',
     buyPrice: '',
     rentPrice: '',
+    quantity: 1,
   }
 
   return (
