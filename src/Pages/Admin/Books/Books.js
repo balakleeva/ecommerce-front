@@ -3,7 +3,7 @@ import Layout from '../../../Components/Admin/Layout'
 import useRequest from '../../../Utils/useRequest'
 import BookService from '../../../Services/BookService'
 import { Button, Row, Table } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Loader from '../../../Components/Loader'
 import styled from 'styled-components'
 
@@ -12,6 +12,7 @@ const StyledButton = styled(Button)`
 `
 
 const Books = () => {
+  const { push } = useHistory()
   const {
     fetch,
     state: { error, isLoading, payload },
@@ -22,6 +23,13 @@ const Books = () => {
   }, [])
 
   const handleDelete = (id) => BookService.delete(id).then(() => fetch())
+
+  const handleMostPopular = () => {
+    BookService.mostPopular().then((response) => {
+      console.log('res', response)
+      // push(`/admin/books/${response.id}`)
+    })
+  }
 
   const columns = [
     {
@@ -79,6 +87,7 @@ const Books = () => {
       <Button style={{ marginBottom: '10px' }}>
         <Link to="/admin/add-book">+ Добавить книгу</Link>
       </Button>
+      <Button onClick={handleMostPopular}>Самая популярная</Button>
       {isLoading && <Loader />}
       {payload && <Table dataSource={payload} columns={columns} />}
     </Layout>

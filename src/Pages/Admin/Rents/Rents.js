@@ -40,6 +40,21 @@ const Rents = () => {
     RentService.search(values).then((response) => setRents(response))
   }
 
+  const handleCurrentRent = () => {
+    RentService.currentRent().then((response) => setRents(response))
+  }
+
+  const handleOutdated = (rentId) => {
+    RentService.markOutdated(rentId).then(() => {
+      notification.warn({
+        message: 'Просрочка отмечена',
+        placement: 'bottomRight',
+      })
+
+      fetch()
+    })
+  }
+
   const columns = [
     {
       title: 'ID',
@@ -81,6 +96,11 @@ const Rents = () => {
       render: (record) => <span>{record.isReturned ? 'Да' : 'Нет'}</span>,
     },
     {
+      title: 'Просрочено',
+      key: 'isOutdated',
+      render: (record) => <span>{record.isOutdated ? 'Да' : 'Нет'}</span>,
+    },
+    {
       title: '',
       key: 'action',
       width: '100',
@@ -95,6 +115,12 @@ const Rents = () => {
           >
             Отметить возврат
           </StyledButton>
+          <StyledButton
+            onClick={() => handleOutdated(record.id)}
+            disabled={record.isOutdated}
+          >
+            Отметить просрочку
+          </StyledButton>
         </Row>
       ),
     },
@@ -106,6 +132,7 @@ const Rents = () => {
         <Link to="/admin/add-rent">+ Добавить аренду</Link>
       </Button>
       <RentSearch handleSearch={handleSearch} />
+      <Button onClick={handleCurrentRent}>Сейчас в аренде</Button>
       {isLoading && <Loader />}
       {rents && <Table dataSource={rents} columns={columns} />}
     </Layout>

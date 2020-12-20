@@ -21,5 +21,8 @@ export default {
   },
   search(data) {
     return ApiService.get('/book/search', data)
+  },
+  mostPopular() {
+    return ApiService.get('/book/most-popular')
   }
 }

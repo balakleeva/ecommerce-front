@@ -19,4 +19,10 @@ export default {
   search(data) {
     return ApiService.get('/rent/search', data)
   },
+  currentRent() {
+    return ApiService.get('/rent/current-rent')
+  },
+  markOutdated(rentId) {
+    return ApiService.put(`/rent/mark-outdated/${rentId}`)
+  }
 }

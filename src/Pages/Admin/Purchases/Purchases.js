@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Button, Row, Table } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { StyledButton } from '../../../Components/StyledComponents'
 import Loader from '../../../Components/Loader'
 import Layout from '../../../Components/Admin/Layout'
@@ -9,6 +9,7 @@ import PurchaseService from '../../../Services/PurchaseService'
 import moment from 'moment'
 
 const Purchases = () => {
+  const { push } = useHistory()
   const {
     fetch,
     state: { error, isLoading, payload },
@@ -19,6 +20,12 @@ const Purchases = () => {
   }, [])
 
   console.log('pay', payload)
+
+  const handleMostExpensive = () => {
+    PurchaseService.mostExpensive().then((response) => {
+      push(`/admin/purchases/${response.id}`)
+    })
+  }
 
   const columns = [
     {
@@ -67,6 +74,7 @@ const Purchases = () => {
       <Button style={{ marginBottom: '10px' }}>
         <Link to="/admin/add-purchase">+ Добавить покупку</Link>
       </Button>
+      <Button onClick={handleMostExpensive}>Самая дорогая покупка</Button>
       {isLoading && <Loader />}
       {payload && <Table dataSource={payload} columns={columns} />}
     </Layout>
