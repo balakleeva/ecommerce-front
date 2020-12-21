@@ -57,7 +57,7 @@ class ApiService {
         if (contentType && contentType.includes(CONTENT_TYPE_JSON)) {
           result = resp.json();
         } else {
-          result = resp.text();
+          result = resp.blob();
         }
 
         return Promise.all([result, resp.status]);

@@ -24,5 +24,8 @@ export default {
   },
   markOutdated(rentId) {
     return ApiService.put(`/rent/mark-outdated/${rentId}`)
-  }
+  },
+  mostPopular() {
+    return ApiService.get('/rent/most-popular')
+  },
 }
