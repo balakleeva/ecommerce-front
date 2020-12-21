@@ -26,8 +26,8 @@ const Books = () => {
 
   const handleMostPopular = () => {
     BookService.mostPopular().then((response) => {
-      console.log('res', response)
-      // push(`/admin/books/${response.id}`)
+      console.log('res', response[0].BookId);
+      push(`/admin/edit-book/${response[0].BookId}`)
     })
   }
 
