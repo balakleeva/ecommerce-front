@@ -47,8 +47,6 @@ const Rent = () => {
     },
   ]
 
-  console.log('paylo', payload)
-
   return (
     <Layout>
       {isLoading && <Loader />}

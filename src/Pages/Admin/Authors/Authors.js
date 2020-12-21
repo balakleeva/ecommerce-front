@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Layout from '../../../Components/Admin/Layout'
 import useRequest from '../../../Utils/useRequest'
 import { Button, Row, Table } from 'antd'
@@ -6,12 +6,16 @@ import { Link } from 'react-router-dom'
 import Loader from '../../../Components/Loader'
 import styled from 'styled-components'
 import AuthorService from '../../../Services/AuthorService'
+import AdminAuthContext from '../../../Contexts/AdminContext'
+import { isLead } from '../../../Utils/roles'
 
 const StyledButton = styled(Button)`
   margin-right: 10px;
 `
 
 const Authors = () => {
+  const { adminInfo } = useContext(AdminAuthContext)
+
   const {
     fetch,
     state: { error, isLoading, payload },
@@ -53,9 +57,11 @@ const Authors = () => {
 
   return (
     <Layout>
-      <Button style={{ marginBottom: '10px' }}>
-        <Link to="/admin/add-author">+ Добавить автора</Link>
-      </Button>
+      {isLead(adminInfo.role) && (
+        <Button style={{ marginBottom: '10px' }}>
+          <Link to="/admin/add-author">+ Добавить автора</Link>
+        </Button>
+      )}
       {isLoading && <Loader />}
       {payload && <Table dataSource={payload} columns={columns} />}
     </Layout>

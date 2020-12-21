@@ -24,7 +24,6 @@ function Home() {
   }, [])
 
   useEffect(() => {
-    console.log('payload effect', payload)
     setBooks(payload)
   }, [payload])
 

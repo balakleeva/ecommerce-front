@@ -19,8 +19,6 @@ const Purchases = () => {
     fetch()
   }, [])
 
-  console.log('pay', payload)
-
   const handleMostExpensive = () => {
     PurchaseService.mostExpensive().then((response) => {
       push(`/admin/purchases/${response.id}`)

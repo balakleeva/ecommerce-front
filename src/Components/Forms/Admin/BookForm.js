@@ -4,17 +4,25 @@ import { StyledRow } from '../../StyledComponents'
 import { Button, Col, Input, Row } from 'antd'
 import GenreSelector from '../../Selectors/GenreSelector'
 import AuthorSelector from '../../Selectors/AuthorSelector'
+import { FieldError } from '../Errors'
 
-const BookForm = ({ initValues, onSubmit }) => {
+const BookForm = ({ initValues, onSubmit, validationSchema }) => {
   return (
-    <Formik initialValues={initValues} onSubmit={(values) => onSubmit(values)}>
-      {({ setFieldValue, values }) => (
+    <Formik
+      initialValues={initValues}
+      validationSchema={validationSchema}
+      onSubmit={(values) => onSubmit(values)}
+    >
+      {({ setFieldValue, values, isSubmitting }) => (
         <Form>
           <StyledRow>
             <Field name="name">
               {({ field }) => (
                 <Col span={24}>
-                  <Row>Название:</Row>
+                  <Row>
+                    Название:
+                    <FieldError name="name" />
+                  </Row>
                   <Row>
                     <Input placeholder="Введите название" {...field} />
                   </Row>
@@ -27,7 +35,9 @@ const BookForm = ({ initValues, onSubmit }) => {
             <Field name="genreId">
               {() => (
                 <Col span={24}>
-                  <Row>Жанр и тип:</Row>
+                  <Row>
+                    Жанр и тип: <FieldError name="genreId" />
+                  </Row>
                   <Row>
                     <GenreSelector
                       value={values.genreId}
@@ -44,7 +54,9 @@ const BookForm = ({ initValues, onSubmit }) => {
             <Field name="authorId">
               {() => (
                 <Col span={24}>
-                  <Row>Автор:</Row>
+                  <Row>
+                    Автор: <FieldError name="authorId" />
+                  </Row>
                   <Row>
                     <AuthorSelector
                       value={values.authorId}
@@ -62,7 +74,9 @@ const BookForm = ({ initValues, onSubmit }) => {
             <Field name="publisher">
               {({ field }) => (
                 <Col span={24}>
-                  <Row>Издательство:</Row>
+                  <Row>
+                    Издательство: <FieldError name="publisher" />
+                  </Row>
                   <Row>
                     <Input placeholder="Введите издательство" {...field} />
                   </Row>
@@ -75,7 +89,9 @@ const BookForm = ({ initValues, onSubmit }) => {
             <Field name="publishYear">
               {({ field }) => (
                 <Col span={24}>
-                  <Row>Год издания:</Row>
+                  <Row>
+                    Год издания: <FieldError name="publishYear" />
+                  </Row>
                   <Row>
                     <Input placeholder="Введите год издания" {...field} />
                   </Row>
@@ -88,7 +104,9 @@ const BookForm = ({ initValues, onSubmit }) => {
             <Field name="buyPrice">
               {({ field }) => (
                 <Col span={24}>
-                  <Row>Цена покупки:</Row>
+                  <Row>
+                    Цена покупки: <FieldError name="buyPrice" />
+                  </Row>
                   <Row>
                     <Input
                       type="number"
@@ -105,7 +123,9 @@ const BookForm = ({ initValues, onSubmit }) => {
             <Field name="rentPrice">
               {({ field }) => (
                 <Col span={24}>
-                  <Row>Цена аренды:</Row>
+                  <Row>
+                    Цена аренды: <FieldError name="rentPrice" />
+                  </Row>
                   <Row>
                     <Input
                       type="number"
@@ -122,7 +142,9 @@ const BookForm = ({ initValues, onSubmit }) => {
             <Field name="quantity">
               {({ field }) => (
                 <Col span={24}>
-                  <Row>Количество:</Row>
+                  <Row>
+                    Количество: <FieldError name="quantity" />
+                  </Row>
                   <Row>
                     <Input
                       placeholder="Введите количество"
@@ -139,7 +161,9 @@ const BookForm = ({ initValues, onSubmit }) => {
             <Field name="image">
               {({ field }) => (
                 <Col span={24}>
-                  <Row>Картинка:</Row>
+                  <Row>
+                    Картинка: <FieldError name="image" />
+                  </Row>
                   <Row>
                     <Input placeholder="Введите url картинки" {...field} />
                   </Row>
@@ -148,7 +172,9 @@ const BookForm = ({ initValues, onSubmit }) => {
             </Field>
           </StyledRow>
 
-          <Button htmlType="submit">Отправить</Button>
+          <Button htmlType="submit" disabled={isSubmitting}>
+            Отправить
+          </Button>
         </Form>
       )}
     </Formik>

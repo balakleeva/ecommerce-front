@@ -20,6 +20,8 @@ import AddPurchase from '../Pages/Admin/Purchases/AddPurchase'
 import Rents from '../Pages/Admin/Rents/Rents'
 import AddRent from '../Pages/Admin/Rents/AddRent'
 import Rent from '../Pages/Admin/Rents/Rent'
+import DirectorRoute from '../HOCs/DirectorRoute'
+import ManagerRoute from '../HOCs/ManagerRoute'
 
 const AdminApp = () => {
   const token = localStorage.adminToken
@@ -58,15 +60,17 @@ const AdminApp = () => {
         <Route path="/admin/login" exact>
           <AdminLogin />
         </Route>
+
         <AdminRoute path="/admin/clients" exact>
           <Clients />
         </AdminRoute>
+
         <AdminRoute path="/admin/books" exact>
           <Books />
         </AdminRoute>
-        <AdminRoute path="/admin/add-book" exact>
+        <ManagerRoute path="/admin/add-book" exact>
           <AddBook />
-        </AdminRoute>
+        </ManagerRoute>
         <AdminRoute path="/admin/edit-book/:bookId" exact>
           <EditBook />
         </AdminRoute>
@@ -74,30 +78,30 @@ const AdminApp = () => {
         <AdminRoute path="/admin/genres" exact>
           <Genres />
         </AdminRoute>
-        <AdminRoute path="/admin/add-genre" exact>
+        <ManagerRoute path="/admin/add-genre" exact>
           <AddGenre />
-        </AdminRoute>
+        </ManagerRoute>
 
         <AdminRoute path="/admin/authors" exact>
           <Authors />
         </AdminRoute>
-        <AdminRoute path="/admin/add-author" exact>
+        <ManagerRoute path="/admin/add-author" exact>
           <AddAuthor />
-        </AdminRoute>
+        </ManagerRoute>
 
-        <AdminRoute path="/admin/staff" exact>
+        <DirectorRoute path="/admin/staff" exact>
           <Staff />
-        </AdminRoute>
-        <AdminRoute path="/admin/add-staff" exact>
+        </DirectorRoute>
+        <DirectorRoute path="/admin/add-staff" exact>
           <AddStaff />
-        </AdminRoute>
+        </DirectorRoute>
 
         <AdminRoute path="/admin/purchases" exact>
           <Purchases />
         </AdminRoute>
-        <AdminRoute path="/admin/add-purchase" exact>
+        <ManagerRoute path="/admin/add-purchase" exact>
           <AddPurchase />
-        </AdminRoute>
+        </ManagerRoute>
         <AdminRoute path="/admin/purchases/:purchaseId" exact>
           <Purchase />
         </AdminRoute>
@@ -105,9 +109,9 @@ const AdminApp = () => {
         <AdminRoute path="/admin/rents" exact>
           <Rents />
         </AdminRoute>
-        <AdminRoute path="/admin/add-rent" exact>
+        <ManagerRoute path="/admin/add-rent" exact>
           <AddRent />
-        </AdminRoute>
+        </ManagerRoute>
         <AdminRoute path="/admin/rents/:rentId" exact>
           <Rent />
         </AdminRoute>

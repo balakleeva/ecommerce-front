@@ -16,8 +16,6 @@ const Clients = () => {
     fetch()
   }, [])
 
-  console.log('pya', payload)
-
   const handleDelete = (id) => {
     console.log('id: ', id)
   }

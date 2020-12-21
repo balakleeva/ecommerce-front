@@ -5,7 +5,6 @@ import AdminAuthContext from '../Contexts/AdminContext'
 const AdminRoute = ({ component: Component, ...rest }) => {
   const { isAuth } = useContext(AdminAuthContext)
 
-  console.log('isAuth', isAuth)
   if (!isAuth) {
     return <Redirect to="/admin/login" />
   }

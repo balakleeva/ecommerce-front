@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Layout from '../../../Components/Admin/Layout'
 import useRequest from '../../../Utils/useRequest'
 import BookService from '../../../Services/BookService'
@@ -6,12 +6,15 @@ import { Button, Row, Table } from 'antd'
 import { Link, useHistory } from 'react-router-dom'
 import Loader from '../../../Components/Loader'
 import styled from 'styled-components'
+import { isLead } from '../../../Utils/roles'
+import AdminAuthContext from '../../../Contexts/AdminContext'
 
 const StyledButton = styled(Button)`
   margin-right: 10px;
 `
 
 const Books = () => {
+  const { adminInfo } = useContext(AdminAuthContext)
   const { push } = useHistory()
   const {
     fetch,
@@ -26,7 +29,6 @@ const Books = () => {
 
   const handleMostPopular = () => {
     BookService.mostPopular().then((response) => {
-      console.log('res', response[0].BookId);
       push(`/admin/edit-book/${response[0].BookId}`)
     })
   }
@@ -84,9 +86,11 @@ const Books = () => {
 
   return (
     <Layout>
-      <Button style={{ marginBottom: '10px' }}>
-        <Link to="/admin/add-book">+ Добавить книгу</Link>
-      </Button>
+      {isLead(adminInfo.role) && (
+        <Button style={{ marginBottom: '10px' }}>
+          <Link to="/admin/add-book">+ Добавить книгу</Link>
+        </Button>
+      )}
       <Button onClick={handleMostPopular}>Самая популярная</Button>
       {isLoading && <Loader />}
       {payload && <Table dataSource={payload} columns={columns} />}

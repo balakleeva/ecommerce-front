@@ -41,8 +41,6 @@ const Book = () => {
 
   const { isAuth } = useContext(ClientAuthContext)
 
-  console.log('pyad', payload)
-
   return (
     <Layout>
       <Styled />

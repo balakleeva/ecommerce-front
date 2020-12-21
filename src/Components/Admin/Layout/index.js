@@ -4,6 +4,7 @@ import { Col, Layout as AntLayout, Menu, Row } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import AdminAuthContext from '../../../Contexts/AdminContext'
 import { Content as ShopContent } from '../../StyledComponents'
+import { isDirector } from '../../../Utils/roles'
 
 const { Header, Content } = AntLayout
 
@@ -42,7 +43,7 @@ const Layout = ({ children }) => {
                   <Menu.Item key="8">
                     <Link to="/admin/rents">Аренды</Link>
                   </Menu.Item>
-                  {adminInfo.role === 'директор' && (
+                  {isDirector(adminInfo.role) && (
                     <Menu.Item key="6">
                       <Link to="/admin/staff">Сотрудники</Link>
                     </Menu.Item>

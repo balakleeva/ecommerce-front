@@ -46,25 +46,29 @@ const AddStaff = () => {
               </Field>
             </StyledRow>
 
-            {values.role === 'менеджер' && (
-              <>
-                <StyledRow>
-                  <Field name="login">
-                    {({ field }) => (
-                      <Input placeholder="Введите логин" {...field} />
-                    )}
-                  </Field>
-                </StyledRow>
+            {values.role === 'менеджер' ||
+              (values.role === 'продавец' && (
+                <>
+                  <StyledRow>
+                    <Field name="login">
+                      {({ field }) => (
+                        <Input placeholder="Введите логин" {...field} />
+                      )}
+                    </Field>
+                  </StyledRow>
 
-                <StyledRow>
-                  <Field name="password">
-                    {({ field }) => (
-                      <Input.Password placeholder="Введите пароль" {...field} />
-                    )}
-                  </Field>
-                </StyledRow>
-              </>
-            )}
+                  <StyledRow>
+                    <Field name="password">
+                      {({ field }) => (
+                        <Input.Password
+                          placeholder="Введите пароль"
+                          {...field}
+                        />
+                      )}
+                    </Field>
+                  </StyledRow>
+                </>
+              ))}
 
             <Button htmlType="submit">Добавить</Button>
           </Form>

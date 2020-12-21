@@ -6,6 +6,9 @@ import { StyledRow } from '../../../Components/StyledComponents'
 import AdminService from '../../../Services/AdminService'
 import AdminAuthContext from '../../../Contexts/AdminContext'
 import { useHistory } from 'react-router-dom'
+import * as Yup from 'yup'
+import { stringValidator } from '../../../validators'
+import { FieldError } from '../../../Components/Forms/Errors'
 
 const Login = () => {
   const { push } = useHistory()
@@ -21,6 +24,10 @@ const Login = () => {
                 login: '',
                 password: '',
               }}
+              validationSchema={Yup.object().shape({
+                login: stringValidator,
+                password: stringValidator,
+              })}
               onSubmit={(values) => {
                 AdminService.auth(values)
                   .then((response) => {
@@ -40,11 +47,18 @@ const Login = () => {
                   <StyledRow>
                     <Field name="login">
                       {({ field }) => (
-                        <Input
-                          type="text"
-                          placeholder="Введите логин"
-                          {...field}
-                        />
+                        <Col span={24}>
+                          <Row>
+                            Логин: <FieldError name="login" />
+                          </Row>
+                          <Row>
+                            <Input
+                              type="text"
+                              placeholder="Введите логин"
+                              {...field}
+                            />
+                          </Row>
+                        </Col>
                       )}
                     </Field>
                   </StyledRow>
@@ -52,10 +66,18 @@ const Login = () => {
                   <StyledRow>
                     <Field name="password">
                       {({ field }) => (
-                        <Input.Password
-                          placeholder="Введите пароль"
-                          {...field}
-                        />
+                        <Col span={24}>
+                          <Row>
+                            Пароль:
+                            <FieldError name="password" />
+                          </Row>
+                          <Row>
+                            <Input.Password
+                              placeholder="Введите пароль"
+                              {...field}
+                            />
+                          </Row>
+                        </Col>
                       )}
                     </Field>
                   </StyledRow>

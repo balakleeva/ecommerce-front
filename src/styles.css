@@ -3,8 +3,8 @@ body {
     height: unset !important;
 }
 
-#root {
-    min-height: 100vh;
+#root, section {
+    min-height: 100vh !important;
 }
 
 .login-row {

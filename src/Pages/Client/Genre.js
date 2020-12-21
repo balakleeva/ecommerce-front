@@ -18,7 +18,6 @@ function Genre() {
     event.preventDefault();
 
     createFetch({ name, genreType }).then(data => {
-      console.log('..........', data);
     }).catch(err => console.error(err));
 
   }, [createFetch, name, genreType]);

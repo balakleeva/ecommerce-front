@@ -25,7 +25,6 @@ const Cart = () => {
   const ids = localStorage.cart && JSON.parse(localStorage.cart)
 
   useEffect(() => {
-    console.log('---dsadas', ids)
     if (ids && ids.length > 0) {
       fetch({ ids })
     }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Layout from '../../../Components/Admin/Layout'
 import useRequest from '../../../Utils/useRequest'
 import { Button, Row, Table } from 'antd'
@@ -6,8 +6,12 @@ import { Link } from 'react-router-dom'
 import { StyledButton } from '../../../Components/StyledComponents'
 import Loader from '../../../Components/Loader'
 import GenreService from '../../../Services/GenreService'
+import AdminAuthContext from '../../../Contexts/AdminContext'
+import { isLead } from '../../../Utils/roles'
 
 const Genres = () => {
+  const { adminInfo } = useContext(AdminAuthContext)
+
   const {
     fetch,
     state: { error, isLoading, payload },
@@ -49,9 +53,11 @@ const Genres = () => {
 
   return (
     <Layout>
-      <Button style={{ marginBottom: '10px' }}>
-        <Link to="/admin/add-genre">+ Добавить жанр</Link>
-      </Button>
+      {isLead(adminInfo.role) && (
+        <Button style={{ marginBottom: '10px' }}>
+          <Link to="/admin/add-genre">+ Добавить жанр</Link>
+        </Button>
+      )}
       {isLoading && <Loader />}
       {payload && <Table dataSource={payload} columns={columns} />}
     </Layout>
