@@ -7,6 +7,9 @@ import { StyledRow } from '../../Components/StyledComponents'
 import ClientService from '../../Services/ClientService'
 import { useHistory } from 'react-router-dom'
 
+import * as Yup from 'yup'
+import { stringValidator } from '../../validators'
+
 const Registration = () => {
   const { push } = useHistory()
   return (
@@ -21,6 +24,12 @@ const Registration = () => {
                 login: '',
                 password: '',
               }}
+              validationSchema={Yup.object().shape({
+                name: stringValidator,
+                phone: stringValidator,
+                login: stringValidator,
+                password: stringValidator,
+              })}
               onSubmit={(values) => {
                 ClientService.create(values).then(() => push('/login'))
               }}

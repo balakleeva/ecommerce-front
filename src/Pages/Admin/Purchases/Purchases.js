@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Button, Row, Table } from 'antd'
 import { Link, useHistory } from 'react-router-dom'
 import { StyledButton } from '../../../Components/StyledComponents'
@@ -7,8 +7,12 @@ import Layout from '../../../Components/Admin/Layout'
 import useRequest from '../../../Utils/useRequest'
 import PurchaseService from '../../../Services/PurchaseService'
 import moment from 'moment'
+import AdminAuthContext from '../../../Contexts/AdminContext'
+import { isDirector } from '../../../Utils/roles'
 
 const Purchases = () => {
+  const { adminInfo } = useContext(AdminAuthContext)
+
   const { push } = useHistory()
   const {
     fetch,
@@ -39,7 +43,9 @@ const Purchases = () => {
     {
       title: 'Клиент',
       key: 'clientName',
-      dataIndex: ['client', 'name'],
+      render: (record) => (
+        <span>{record.client ? record.client.name : record.guestName}</span>
+      ),
     },
     {
       title: 'Сумма покупки',
@@ -72,7 +78,9 @@ const Purchases = () => {
       <Button style={{ marginBottom: '10px' }}>
         <Link to="/admin/add-purchase">+ Добавить покупку</Link>
       </Button>
-      <Button onClick={handleMostExpensive}>Самая дорогая покупка</Button>
+      {isDirector(adminInfo.role) && (
+        <Button onClick={handleMostExpensive}>Самая дорогая покупка</Button>
+      )}
       {isLoading && <Loader />}
       {payload && <Table dataSource={payload} columns={columns} />}
     </Layout>

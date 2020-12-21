@@ -59,9 +59,7 @@ const Purchase = () => {
                   <StyledRow>
                     <Text strong>Имя: </Text>
                     <Text>
-                      {payload.client
-                        ? payload.client.name
-                        : 'Незарегистрированный'}
+                      {payload.client ? payload.client.name : payload.guestName}
                     </Text>
                   </StyledRow>
                 </Card>
@@ -82,6 +80,12 @@ const Purchase = () => {
 
               <Col span={24}>
                 <Card title="Книги">
+                  <Row>
+                    <Text strong>Сумма покупки: </Text>
+                    <Text>
+                      {payload.Books.reduce((acc, el) => acc + el.buyPrice, 0)}
+                    </Text>
+                  </Row>
                   <Table dataSource={payload.Books} columns={columns} />
                 </Card>
               </Col>
