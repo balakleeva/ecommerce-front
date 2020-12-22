@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Row, Table } from 'antd'
 import { Link, useHistory } from 'react-router-dom'
 import { StyledButton } from '../../../Components/StyledComponents'
@@ -9,8 +9,11 @@ import PurchaseService from '../../../Services/PurchaseService'
 import moment from 'moment'
 import AdminAuthContext from '../../../Contexts/AdminContext'
 import { isDirector } from '../../../Utils/roles'
+import PurchaseSearch from '../../../Components/Forms/Admin/PurchaseSearch'
 
 const Purchases = () => {
+  const [purchases, setPurchases] = useState(null)
+
   const { adminInfo } = useContext(AdminAuthContext)
 
   const { push } = useHistory()
@@ -22,6 +25,10 @@ const Purchases = () => {
   useEffect(() => {
     fetch()
   }, [])
+
+  useEffect(() => {
+    setPurchases(payload)
+  }, [payload])
 
   const handleMostExpensive = () => {
     PurchaseService.mostExpensive().then((response) => {
@@ -73,16 +80,21 @@ const Purchases = () => {
     },
   ]
 
+  const handleSearch = (values) => {
+    PurchaseService.search(values).then((response) => setPurchases(response))
+  }
+
   return (
     <Layout>
       <Button style={{ marginBottom: '10px' }}>
         <Link to="/admin/add-purchase">+ Добавить покупку</Link>
       </Button>
+      <PurchaseSearch handleSearch={handleSearch} />
       {isDirector(adminInfo.role) && (
         <Button onClick={handleMostExpensive}>Самая дорогая покупка</Button>
       )}
       {isLoading && <Loader />}
-      {payload && <Table dataSource={payload} columns={columns} />}
+      {purchases && <Table dataSource={purchases} columns={columns} />}
     </Layout>
   )
 }

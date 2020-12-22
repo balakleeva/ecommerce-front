@@ -16,4 +16,7 @@ export default {
   mostExpensive() {
     return ApiService.get('/purchase/most-expensive')
   },
+  search(data) {
+    return ApiService.get('/purchase/search', data)
+  }
 }

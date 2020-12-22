@@ -50,7 +50,7 @@ const Book = () => {
           <StyledRow justify="center">
             <Col span={12}>
               <StyledRow justify="center">
-                <Image style={{ objectFit: 'contain' }} src={payload.image} />
+                <Image style={{ objectFit: 'contain' }} src={payload.image} height={300} />
               </StyledRow>
 
               <StyledRow justify="center">
@@ -73,6 +73,12 @@ const Book = () => {
                   </Descriptions.Item>
                   <Descriptions.Item label="Год выпуска">
                     {payload.publishYear}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="Цена покупки">
+                    {payload.buyPrice}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="Цена аренды">
+                    {payload.rentPrice}
                   </Descriptions.Item>
                 </Descriptions>
 

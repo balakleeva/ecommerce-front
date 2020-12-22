@@ -22,6 +22,8 @@ import AddRent from '../Pages/Admin/Rents/AddRent'
 import Rent from '../Pages/Admin/Rents/Rent'
 import DirectorRoute from '../HOCs/DirectorRoute'
 import ManagerRoute from '../HOCs/ManagerRoute'
+import MostPopularBook from '../Pages/Admin/Books/MostPopularBook'
+import MostPopulerBookRent from '../Pages/Admin/Books/MostPopulerBookRent';
 
 const AdminApp = () => {
   const token = localStorage.adminToken
@@ -74,6 +76,12 @@ const AdminApp = () => {
         <AdminRoute path="/admin/edit-book/:bookId" exact>
           <EditBook />
         </AdminRoute>
+        <DirectorRoute path="/admin/most-popular-book">
+          <MostPopularBook />
+        </DirectorRoute>
+        <DirectorRoute path="/admin/most-popular-book-rent">
+          <MostPopulerBookRent />
+        </DirectorRoute>
 
         <AdminRoute path="/admin/genres" exact>
           <Genres />

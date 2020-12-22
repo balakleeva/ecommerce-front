@@ -6,7 +6,13 @@ import ClientService from '../../Services/ClientService'
 
 const { Option } = Select
 
-function ClientSelector({ value, onChange, className, multiple = false }) {
+function ClientSelector({
+  value,
+  onChange,
+  className,
+  multiple = false,
+  disabled = false,
+}) {
   const {
     fetch,
     state: { error, isLoading, payload },
@@ -22,6 +28,7 @@ function ClientSelector({ value, onChange, className, multiple = false }) {
       {isLoading && <div>loader</div>}
       {payload && (
         <StyledSelect
+          disabled={disabled}
           onChange={onChange}
           value={value}
           mode={multiple ? 'multiple' : 'default'}

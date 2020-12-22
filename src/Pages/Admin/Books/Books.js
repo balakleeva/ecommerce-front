@@ -3,7 +3,7 @@ import Layout from '../../../Components/Admin/Layout'
 import useRequest from '../../../Utils/useRequest'
 import BookService from '../../../Services/BookService'
 import { Button, Row, Table } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Loader from '../../../Components/Loader'
 import styled from 'styled-components'
 import { isDirector, isLead } from '../../../Utils/roles'
@@ -15,6 +15,7 @@ const StyledButton = styled(Button)`
 `
 
 const Books = () => {
+  const { push } = useHistory()
   const { adminInfo } = useContext(AdminAuthContext)
   const {
     fetch,
@@ -28,27 +29,11 @@ const Books = () => {
   const handleDelete = (id) => BookService.delete(id).then(() => fetch())
 
   const handleMostPopular = () => {
-    BookService.mostPopular().then((blob) => {
-      const url = window.URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = 'popular_purchase.pdf'
-      document.body.appendChild(a) // we need to append the element to the dom -> otherwise it will not work in firefox
-      a.click()
-      a.remove()
-    })
+    push('/admin/most-popular-book')
   }
 
   const handleMostPopularRent = () => {
-    RentService.mostPopular().then((blob) => {
-      const url = window.URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = 'popular_rent.pdf'
-      document.body.appendChild(a) // we need to append the element to the dom -> otherwise it will not work in firefox
-      a.click()
-      a.remove()
-    })
+    push('/admin/most-popular-book-rent')
   }
 
   const columns = [
