@@ -7,4 +7,10 @@ export default {
   create(data) {
     return ApiService.post('/author', data)
   },
+  update(id, data) {
+    return ApiService.put(`/author/${id}`, data);
+  },
+  get(id) {
+    return ApiService.get(`/author/${id}`);
+  },
 }

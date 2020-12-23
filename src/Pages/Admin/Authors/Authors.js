@@ -48,7 +48,7 @@ const Authors = () => {
       render: (record) => (
         <Row>
           <StyledButton>
-            <Link to={`/admin/edit-genre/${record.id}`}>Редактировать</Link>
+            <Link to={`/admin/edit-author/${record.id}`}>Редактировать</Link>
           </StyledButton>
         </Row>
       ),

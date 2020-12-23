@@ -28,6 +28,7 @@ import Orders from '../Pages/Admin/Orders/Orders';
 import MakeOrder from '../Pages/Admin/Orders/MakeOrder';
 import MostProductiveStaff from '../Pages/Admin/Purchases/MostProductiveStaff';
 import UpdateGenre from '../Pages/Admin/Genres/UpdateGenre';
+import UpdateAuthor from '../Pages/Admin/Authors/UpdateAuthor';
 
 const AdminApp = () => {
   const token = localStorage.adminToken
@@ -102,6 +103,9 @@ const AdminApp = () => {
         </AdminRoute>
         <ManagerRoute path="/admin/add-author" exact>
           <AddAuthor />
+        </ManagerRoute>
+        <ManagerRoute path="/admin/edit-author/:id" exact>
+          <UpdateAuthor />
         </ManagerRoute>
 
         <DirectorRoute path="/admin/staff" exact>
