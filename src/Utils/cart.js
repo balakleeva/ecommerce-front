@@ -6,7 +6,9 @@ export const handleAddToCart = (bookId) => {
     cart = JSON.parse(localStorage.getItem('cart'))
   }
 
-  cart.push(bookId)
+  if (!cart.includes(bookId)) {
+    cart.push(bookId)
+  }
 
   localStorage.setItem('cart', JSON.stringify(cart))
 

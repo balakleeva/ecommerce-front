@@ -17,7 +17,7 @@ const Clients = () => {
   }, [])
 
   const handleDelete = (id) => {
-    console.log('id: ', id)
+    ClientService.remove(id).then(fetch);
   }
 
   const columns = [

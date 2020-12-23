@@ -9,5 +9,8 @@ export default {
 	},
 	login(data) {
 		return ApiService.post('/client/auth', data)
+	},
+	remove(id) {
+		return ApiService.delete(`/client/${id}`);
 	}
 }
