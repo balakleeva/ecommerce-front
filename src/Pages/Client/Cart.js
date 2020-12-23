@@ -85,7 +85,7 @@ const Cart = () => {
               <StyledRow key={book.id}>
                 <StyledCard title={book.name}>
                   <Row>
-                    <Col span={6}>Автор: {book.author}</Col>
+                    <Col span={6}>Автор: {book.author.name}</Col>
                     <Col span={6}>Издательство: {book.publisher}</Col>
                     <Col span={6}>
                       <Button onClick={() => handleRemoveFromCart(book.id)}>
@@ -94,7 +94,7 @@ const Cart = () => {
                     </Col>
                   </Row>
                   <Row>
-                    <Col span={6}>Жанр: {book.genre}</Col>
+                    <Col span={6}>Жанр: {book.genre.name}</Col>
                     <Col span={6}>Год издания: {book.publishYear}</Col>
                   </Row>
                 </StyledCard>
