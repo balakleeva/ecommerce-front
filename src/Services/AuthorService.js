@@ -13,4 +13,7 @@ export default {
   get(id) {
     return ApiService.get(`/author/${id}`);
   },
+  remove(id) {
+    return ApiService.delete(`/author/${id}`);
+  },
 }

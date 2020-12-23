@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useCallback, useContext, useEffect } from 'react';
 import Layout from '../../../Components/Admin/Layout'
 import useRequest from '../../../Utils/useRequest'
 import { Button, Row, Table } from 'antd'
@@ -19,7 +19,11 @@ const Authors = () => {
   const {
     fetch,
     state: { error, isLoading, payload },
-  } = useRequest(AuthorService.getAll)
+  } = useRequest(AuthorService.getAll);
+
+  const remove = useCallback((id) => {
+    AuthorService.remove(id).then(fetch);
+  }, [fetch]);
 
   useEffect(() => {
     fetch()
@@ -47,9 +51,10 @@ const Authors = () => {
       width: '100',
       render: (record) => (
         <Row>
-          <StyledButton>
+          <StyledButton style={{marginRight: 10}}>
             <Link to={`/admin/edit-author/${record.id}`}>Редактировать</Link>
           </StyledButton>
+          <StyledButton onClick={() => remove(record.id)}>Удалить</StyledButton>
         </Row>
       ),
     },

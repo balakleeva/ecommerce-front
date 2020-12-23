@@ -60,7 +60,7 @@ const Book = () => {
               <Card title="Сведения о книге">
                 <Descriptions column={1}>
                   <Descriptions.Item label="Автор">
-                    {payload.author.name}
+                    {(payload.author && payload.author.name) || "Неизвестно"}
                   </Descriptions.Item>
                   <Descriptions.Item label="Жанр">
                     {payload.genre.name}
