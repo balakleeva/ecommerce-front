@@ -13,4 +13,7 @@ export default {
   get(id) {
     return ApiService.get(`/genre/${id}`);
   },
+  remove(id) {
+    return ApiService.delete(`/genre/${id}`);
+  },
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useCallback, useContext, useEffect } from 'react';
 import Layout from '../../../Components/Admin/Layout'
 import useRequest from '../../../Utils/useRequest'
 import { Button, Row, Table } from 'antd'
@@ -20,6 +20,10 @@ const Genres = () => {
   useEffect(() => {
     fetch()
   }, [])
+
+  const remove = useCallback((id) => {
+    GenreService.remove(id).then(fetch);
+  }, [fetch]);
 
   const columns = [
     {
@@ -46,6 +50,9 @@ const Genres = () => {
           <StyledButton>
             <Link to={`/admin/edit-genre/${record.id}`}>Редактировать</Link>
           </StyledButton>
+          <Button onClick={() => remove(record.id)}>
+            Удалить
+          </Button>
         </Row>
       ),
     },
