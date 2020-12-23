@@ -43,6 +43,9 @@ const Layout = ({ children }) => {
                   <Menu.Item key="8">
                     <Link to="/admin/rents">Аренды</Link>
                   </Menu.Item>
+                  <Menu.Item key="10">
+                    <Link to="/admin/orders">Заявки</Link>
+                  </Menu.Item>
                   {isDirector(adminInfo.role) && (
                     <Menu.Item key="6">
                       <Link to="/admin/staff">Сотрудники</Link>

@@ -22,6 +22,7 @@ function AuthorSelector({ value, onChange, className }) {
       {isLoading && <div>loader</div>}
       {payload && (
         <StyledSelect onChange={onChange} value={value}>
+          <Option value="">-</Option>
           {payload &&
             payload.map(({ id, name }) => (
               <Option key={id} value={id}>

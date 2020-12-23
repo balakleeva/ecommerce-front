@@ -25,6 +25,11 @@ const Layout = ({ children }) => {
               <Link to="/cart">Корзина</Link>
             </Menu.Item>
           )}
+          {isAuth && (
+            <Menu.Item key="2">
+              <Link to="/add-order">Создать заявку</Link>
+            </Menu.Item>
+          )}
           <Menu.Item key="3">
             {isAuth ? (
               <span onClick={handleLogout}>Выйти</span>

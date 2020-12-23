@@ -7,6 +7,7 @@ const { Option } = Select
 function RoleSelector({ value, onChange, className }) {
   return (
     <StyledSelect onChange={onChange} value={value}>
+      <Option value="">-</Option>
       <Option value="мастер_чистоты">Мастер чистоты</Option>
       <Option value="бухгалтер">Бухгалтер</Option>
       <Option value="продавец">Продавец</Option>

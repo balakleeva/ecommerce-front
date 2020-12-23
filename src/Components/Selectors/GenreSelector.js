@@ -22,6 +22,7 @@ function GenreSelector({ value, onChange, className }) {
       {isLoading && <div>loader</div>}
       {payload && (
         <StyledSelect onChange={onChange} value={value}>
+          <Option value="">-</Option>
           {payload &&
             payload.map(({ id, name, genreType }) => (
               <Option key={id} value={id}>

@@ -2,15 +2,15 @@ import ApiService from './ApiService'
 
 export default {
   getAll() {
-    return ApiService.get('/admin')
+    return ApiService.get('/staff')
   },
   create(data) {
-    return ApiService.post('/admin', data)
+    return ApiService.post('/staff', data)
   },
   auth(data) {
-    return ApiService.post('/admin/auth', data)
+    return ApiService.post('/staff/auth', data)
   },
   search(data) {
-    return ApiService.get('/admin/search', data)
-  }
+    return ApiService.get('/staff/search', data)
+  },
 }

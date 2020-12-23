@@ -33,6 +33,7 @@ function ClientSelector({
           value={value}
           mode={multiple ? 'multiple' : 'default'}
         >
+          <Option value="">-</Option>
           {payload &&
             payload.map(({ id, name }) => (
               <Option key={id} value={id}>

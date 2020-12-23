@@ -36,6 +36,7 @@ const AddBook = () => {
     rentPrice: numberValidator,
     quantity: numberValidator,
   })
+
   return (
     <Layout>
       <BookForm

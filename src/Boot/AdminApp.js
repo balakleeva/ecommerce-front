@@ -24,6 +24,8 @@ import DirectorRoute from '../HOCs/DirectorRoute'
 import ManagerRoute from '../HOCs/ManagerRoute'
 import MostPopularBook from '../Pages/Admin/Books/MostPopularBook'
 import MostPopulerBookRent from '../Pages/Admin/Books/MostPopulerBookRent';
+import Orders from '../Pages/Admin/Orders/Orders';
+import MakeOrder from '../Pages/Admin/Orders/MakeOrder';
 
 const AdminApp = () => {
   const token = localStorage.adminToken
@@ -123,6 +125,13 @@ const AdminApp = () => {
         <AdminRoute path="/admin/rents/:rentId" exact>
           <Rent />
         </AdminRoute>
+
+        <ManagerRoute path="/admin/orders" exact>
+          <Orders />
+        </ManagerRoute>
+        <ManagerRoute path="/admin/make-order/:orderId" exact>
+          <MakeOrder />
+        </ManagerRoute>
       </Switch>
     </AdminAuthContext.Provider>
   )

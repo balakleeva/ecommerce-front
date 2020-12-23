@@ -9,6 +9,7 @@ import Registration from '../Pages/Client/Registration'
 import AuthenticatedRoute from '../HOCs/AuthenticatedRoute'
 import Cart from '../Pages/Client/Cart'
 import ClientAuthContext from '../Contexts/ClientContext'
+import AddOrder from '../Pages/Client/AddOrder';
 
 const ClientApp = () => {
   const [clientInfo, setClient] = useState({
@@ -44,6 +45,9 @@ const ClientApp = () => {
         </Route>
         <AuthenticatedRoute path="/cart">
           <Cart />
+        </AuthenticatedRoute>
+        <AuthenticatedRoute path="/add-order">
+          <AddOrder />
         </AuthenticatedRoute>
       </Switch>
     </ClientAuthContext.Provider>
