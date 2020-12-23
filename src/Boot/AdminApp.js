@@ -26,6 +26,7 @@ import MostPopularBook from '../Pages/Admin/Books/MostPopularBook'
 import MostPopulerBookRent from '../Pages/Admin/Books/MostPopulerBookRent';
 import Orders from '../Pages/Admin/Orders/Orders';
 import MakeOrder from '../Pages/Admin/Orders/MakeOrder';
+import MostProductiveStaff from '../Pages/Admin/Purchases/MostProductiveStaff';
 
 const AdminApp = () => {
   const token = localStorage.adminToken
@@ -106,6 +107,10 @@ const AdminApp = () => {
           <AddStaff />
         </DirectorRoute>
 
+
+        <AdminRoute path="/admin/purchases/staff-kpi" exact>
+          <MostProductiveStaff />
+        </AdminRoute>
         <AdminRoute path="/admin/purchases" exact>
           <Purchases />
         </AdminRoute>

@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from 'react'
-import Layout from '../../../Components/Admin/Layout'
-import useRequest from '../../../Utils/useRequest'
-import { Button, Row, Table } from 'antd'
-import { Link } from 'react-router-dom'
-import Loader from '../../../Components/Loader'
-import styled from 'styled-components'
-import AdminService from '../../../Services/AdminService'
-import StaffSearch from '../../../Components/Forms/Admin/StaffSearch'
+import React, { useEffect, useState } from 'react';
+import Layout from '../../../Components/Admin/Layout';
+import useRequest from '../../../Utils/useRequest';
+import { Button, Row, Table } from 'antd';
+import { Link } from 'react-router-dom';
+import Loader from '../../../Components/Loader';
+import styled from 'styled-components';
+import AdminService from '../../../Services/AdminService';
+import StaffSearch from '../../../Components/Forms/Admin/StaffSearch';
 
 const StyledButton = styled(Button)`
   margin-right: 10px;
-`
+`;
 
 const Staff = () => {
-  const [staff, setStaff] = useState(null)
+  const [staff, setStaff] = useState(null);
 
   const {
     fetch,
     state: { error, isLoading, payload },
-  } = useRequest(AdminService.getAll)
+  } = useRequest(AdminService.getAll);
 
   useEffect(() => {
-    fetch()
-  }, [])
+    fetch();
+  }, []);
 
   useEffect(() => {
-    setStaff(payload)
-  }, [payload])
+    setStaff(payload);
+  }, [payload]);
 
   const columns = [
     {
@@ -56,22 +56,25 @@ const Staff = () => {
         </Row>
       ),
     },
-  ]
+  ];
 
   const handleSearch = (values) => {
-    AdminService.search(values).then((response) => setStaff(response))
-  }
+    AdminService.search(values).then((response) => setStaff(response));
+  };
 
   return (
     <Layout>
-      <Button style={{ marginBottom: '10px' }}>
-        <Link to="/admin/add-staff">+ Добавить сотрудника</Link>
-      </Button>
+      <Row style={{ marginBottom: '10px' }}>
+        <Button style={{ marginRight: '8px' }}>
+          <Link to="/admin/add-staff">+ Добавить сотрудника</Link>
+        </Button>
+        <Link component={Button} to="/admin/purchases/staff-kpi">Производительность сотрудников</Link>
+      </Row>
       <StaffSearch handleSearch={handleSearch} />
       {isLoading && <Loader />}
       {staff && <Table dataSource={staff} columns={columns} />}
     </Layout>
-  )
-}
+  );
+};
 
-export default Staff
+export default Staff;

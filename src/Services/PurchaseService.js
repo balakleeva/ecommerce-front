@@ -18,5 +18,8 @@ export default {
   },
   search(data) {
     return ApiService.get('/purchase/search', data)
-  }
+  },
+  staffKpi() {
+    return ApiService.get('/purchase/staff-kpi');
+  },
 }
