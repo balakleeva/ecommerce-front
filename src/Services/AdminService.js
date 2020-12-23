@@ -13,4 +13,10 @@ export default {
   search(data) {
     return ApiService.get('/staff/search', data)
   },
+  get(id) {
+    return ApiService.get(`/staff/${id}`)
+  },
+  update(id, data) {
+    return ApiService.put(`/staff/${id}`, data)
+  },
 }
