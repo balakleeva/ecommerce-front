@@ -27,6 +27,7 @@ import MostPopulerBookRent from '../Pages/Admin/Books/MostPopulerBookRent';
 import Orders from '../Pages/Admin/Orders/Orders';
 import MakeOrder from '../Pages/Admin/Orders/MakeOrder';
 import MostProductiveStaff from '../Pages/Admin/Purchases/MostProductiveStaff';
+import UpdateGenre from '../Pages/Admin/Genres/UpdateGenre';
 
 const AdminApp = () => {
   const token = localStorage.adminToken
@@ -89,6 +90,9 @@ const AdminApp = () => {
         <AdminRoute path="/admin/genres" exact>
           <Genres />
         </AdminRoute>
+        <ManagerRoute path="/admin/edit-genre/:id" exact>
+          <UpdateGenre />
+        </ManagerRoute>
         <ManagerRoute path="/admin/add-genre" exact>
           <AddGenre />
         </ManagerRoute>
