@@ -77,12 +77,14 @@ const Books = () => {
       key: 'action',
       width: '100',
       render: (record) => (
-        <Row>
-          <StyledButton>
-            <Link to={`/admin/edit-book/${record.id}`}>Редактировать</Link>
-          </StyledButton>
-          <Button onClick={() => handleDelete(record.id)}>Удалить</Button>
-        </Row>
+        <>
+          {isLead(adminInfo.role) && <Row>
+            <StyledButton>
+              <Link to={`/admin/edit-book/${record.id}`}>Редактировать</Link>
+            </StyledButton>
+            <Button onClick={() => handleDelete(record.id)}>Удалить</Button>
+          </Row>}
+        </>
       ),
     },
   ]

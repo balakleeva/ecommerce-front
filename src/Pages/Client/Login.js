@@ -45,11 +45,16 @@ const Login = () => {
                   <StyledRow>
                     <Field name="login">
                       {({ field }) => (
-                        <Input
-                          type="login"
-                          placeholder="Введите эмейл"
-                          {...field}
-                        />
+                        <Col span={24}>
+                          <Row>Логин</Row>
+                          <Row>
+                            <Input
+                              type="login"
+                              placeholder="Введите эмейл"
+                              {...field}
+                            />
+                          </Row>
+                        </Col>
                       )}
                     </Field>
                   </StyledRow>
@@ -57,11 +62,16 @@ const Login = () => {
                   <StyledRow>
                     <Field name="password">
                       {({ field }) => (
-                        <Input
-                          type="password"
-                          placeholder="Введите пароль"
-                          {...field}
-                        />
+                        <Col span={24}>
+                          <Row>Пароль</Row>
+                          <Row>
+                            <Input
+                              type="password"
+                              placeholder="Введите пароль"
+                              {...field}
+                            />
+                          </Row>
+                        </Col>
                       )}
                     </Field>
                   </StyledRow>

@@ -4,7 +4,7 @@ import { Col, Layout as AntLayout, Menu, Row } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import AdminAuthContext from '../../../Contexts/AdminContext'
 import { Content as ShopContent } from '../../StyledComponents'
-import { isDirector } from '../../../Utils/roles'
+import { isDirector, isLead } from '../../../Utils/roles'
 
 const { Header, Content } = AntLayout
 
@@ -43,9 +43,9 @@ const Layout = ({ children }) => {
                   <Menu.Item key="8">
                     <Link to="/admin/rents">Аренды</Link>
                   </Menu.Item>
-                  <Menu.Item key="10">
+                  {isLead(adminInfo.role) && <Menu.Item key="10">
                     <Link to="/admin/orders">Заявки</Link>
-                  </Menu.Item>
+                  </Menu.Item>}
                   {isDirector(adminInfo.role) && (
                     <Menu.Item key="6">
                       <Link to="/admin/staff">Сотрудники</Link>
@@ -57,8 +57,8 @@ const Layout = ({ children }) => {
                 {isAuth ? (
                   <span onClick={onLogout}>Выйти</span>
                 ) : (
-                  <Link to="/admin/login">Войти</Link>
-                )}
+                    <Link to="/admin/login">Войти</Link>
+                  )}
               </Menu.Item>
             </Menu>
           </Col>

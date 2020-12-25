@@ -30,6 +30,7 @@ import MostProductiveStaff from '../Pages/Admin/Purchases/MostProductiveStaff';
 import UpdateGenre from '../Pages/Admin/Genres/UpdateGenre';
 import UpdateAuthor from '../Pages/Admin/Authors/UpdateAuthor';
 import UpdateStaff from '../Pages/Admin/Staff/UpdateStaff';
+import AddClient from '../Pages/Admin/Clients/AddClient';
 
 const AdminApp = () => {
   const token = localStorage.adminToken
@@ -71,6 +72,9 @@ const AdminApp = () => {
 
         <AdminRoute path="/admin/clients" exact>
           <Clients />
+        </AdminRoute>
+        <AdminRoute path="/admin/add-client" exact>
+          <AddClient />
         </AdminRoute>
 
         <AdminRoute path="/admin/books" exact>

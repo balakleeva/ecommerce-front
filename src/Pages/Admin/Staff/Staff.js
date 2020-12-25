@@ -53,6 +53,9 @@ const Staff = () => {
           <StyledButton>
             <Link to={`/admin/edit-staff/${record.id}`}>Редактировать</Link>
           </StyledButton>
+          <StyledButton>
+            Уволить
+          </StyledButton>
         </Row>
       ),
     },

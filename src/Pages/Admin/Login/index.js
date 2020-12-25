@@ -42,7 +42,7 @@ const Login = () => {
                   )
               }}
             >
-              {() => (
+              {({ isValid }) => (
                 <Form>
                   <StyledRow>
                     <Field name="login">
@@ -82,7 +82,7 @@ const Login = () => {
                     </Field>
                   </StyledRow>
 
-                  <Button block htmlType="submit">
+                  <Button block htmlType="submit" disabled={!isValid}>
                     Войти
                   </Button>
                 </Form>

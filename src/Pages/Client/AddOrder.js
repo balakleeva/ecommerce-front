@@ -28,7 +28,7 @@ const AddOrder = () => {
           >
             {() => (
               <Form>
-                <StyledRow gutter={10}>
+                <StyledRow gutter={10} align="middle">
                   <Col span={12}>
                     <Row>Название книги: </Row>
                     <StyledRow>

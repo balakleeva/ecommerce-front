@@ -13,7 +13,7 @@ const BookForm = ({ initValues, onSubmit, validationSchema }) => {
       validationSchema={validationSchema}
       onSubmit={(values) => onSubmit(values)}
     >
-      {({ setFieldValue, values, isSubmitting }) => (
+      {({ setFieldValue, values, isSubmitting, isValid }) => (
         <Form>
           <StyledRow>
             <Field name="name">
@@ -172,7 +172,7 @@ const BookForm = ({ initValues, onSubmit, validationSchema }) => {
             </Field>
           </StyledRow>
 
-          <Button htmlType="submit" disabled={isSubmitting}>
+          <Button htmlType="submit" disabled={isSubmitting || !isValid}>
             Отправить
           </Button>
         </Form>

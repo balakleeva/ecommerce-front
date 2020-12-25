@@ -41,6 +41,8 @@ const Book = () => {
 
   const { isAuth } = useContext(ClientAuthContext)
 
+  console.log('payload', payload)
+
   return (
     <Layout>
       <Styled />
@@ -87,6 +89,7 @@ const Book = () => {
                     <Button
                       type="primary"
                       onClick={() => handleAddToCart(payload.id)}
+                      disabled={payload.quantity === 0}
                     >
                       Добавить в корзину
                     </Button>

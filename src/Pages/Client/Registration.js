@@ -39,11 +39,16 @@ const Registration = () => {
                   <StyledRow>
                     <Field name="name">
                       {({ field }) => (
-                        <Input
-                          type="text"
-                          placeholder="Введите имя"
-                          {...field}
-                        />
+                        <Col span={24}>
+                          <Row>Имя</Row>
+                          <Row>
+                            <Input
+                              type="text"
+                              placeholder="Введите имя"
+                              {...field}
+                            />
+                          </Row>
+                        </Col>
                       )}
                     </Field>
                   </StyledRow>
@@ -51,11 +56,16 @@ const Registration = () => {
                   <StyledRow>
                     <Field name="phone">
                       {({ field }) => (
-                        <Input
-                          type="text"
-                          placeholder="Введите телефон"
-                          {...field}
-                        />
+                        <Col span={24}>
+                          <Row>Телефон</Row>
+                          <Row>
+                            <Input
+                              type="text"
+                              placeholder="Введите телефон"
+                              {...field}
+                            />
+                          </Row>
+                        </Col>
                       )}
                     </Field>
                   </StyledRow>
@@ -63,11 +73,16 @@ const Registration = () => {
                   <StyledRow>
                     <Field name="login">
                       {({ field }) => (
-                        <Input
-                          type="text"
-                          placeholder="Введите эмейл"
-                          {...field}
-                        />
+                        <Col span={24}>
+                          <Row>Логин</Row>
+                          <Row>
+                            <Input
+                              type="text"
+                              placeholder="Введите логин"
+                              {...field}
+                            />
+                          </Row>
+                        </Col>
                       )}
                     </Field>
                   </StyledRow>
@@ -75,10 +90,15 @@ const Registration = () => {
                   <StyledRow>
                     <Field name="password">
                       {({ field }) => (
-                        <Input.Password
-                          placeholder="Введите пароль"
-                          {...field}
-                        />
+                        <Col span={24}>
+                          <Row>Пароль</Row>
+                          <Row>
+                            <Input.Password
+                              placeholder="Введите пароль"
+                              {...field}
+                            />
+                          </Row>
+                        </Col>
                       )}
                     </Field>
                   </StyledRow>

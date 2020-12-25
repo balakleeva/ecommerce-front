@@ -26,7 +26,7 @@ const Layout = ({ children }) => {
             </Menu.Item>
           )}
           {isAuth && (
-            <Menu.Item key="2">
+            <Menu.Item key="4">
               <Link to="/add-order">Создать заявку</Link>
             </Menu.Item>
           )}

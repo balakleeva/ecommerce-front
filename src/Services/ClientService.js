@@ -12,5 +12,8 @@ export default {
 	},
 	remove(id) {
 		return ApiService.delete(`/client/${id}`);
+	},
+	createAdmin(data) {
+		return ApiService.post('/client/create-admin', data)
 	}
 }

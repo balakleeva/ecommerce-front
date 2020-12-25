@@ -46,14 +46,16 @@ const Genres = () => {
       key: 'action',
       width: '100',
       render: (record) => (
-        <Row>
-          <StyledButton>
-            <Link to={`/admin/edit-genre/${record.id}`}>Редактировать</Link>
-          </StyledButton>
-          <Button onClick={() => remove(record.id)}>
-            Удалить
+        <>
+          {isLead(adminInfo.role) && <Row>
+            <StyledButton>
+              <Link to={`/admin/edit-genre/${record.id}`}>Редактировать</Link>
+            </StyledButton>
+            <Button onClick={() => remove(record.id)}>
+              Удалить
           </Button>
-        </Row>
+          </Row>}
+        </>
       ),
     },
   ]

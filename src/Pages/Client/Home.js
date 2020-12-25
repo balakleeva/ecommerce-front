@@ -66,7 +66,7 @@ function Home() {
 
                   {isAuth && (
                     <Row>
-                      <Button block onClick={() => handleAddToCart(book.id)}>
+                      <Button block onClick={() => handleAddToCart(book.id)} disabled={book.quantity === 0}>
                         Добавить в корзину
                       </Button>
                     </Row>

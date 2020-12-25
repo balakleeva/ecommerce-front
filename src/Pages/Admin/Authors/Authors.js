@@ -50,12 +50,14 @@ const Authors = () => {
       key: 'action',
       width: '100',
       render: (record) => (
-        <Row>
-          <StyledButton style={{marginRight: 10}}>
-            <Link to={`/admin/edit-author/${record.id}`}>Редактировать</Link>
-          </StyledButton>
-          <StyledButton onClick={() => remove(record.id)}>Удалить</StyledButton>
-        </Row>
+        <>
+          {isLead(adminInfo.role) && <Row>
+            <StyledButton style={{ marginRight: 10 }}>
+              <Link to={`/admin/edit-author/${record.id}`}>Редактировать</Link>
+            </StyledButton>
+            <StyledButton onClick={() => remove(record.id)}>Удалить</StyledButton>
+          </Row>}
+        </>
       ),
     },
   ]

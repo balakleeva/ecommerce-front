@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import Layout from '../../../Components/Admin/Layout'
 import useRequest from '../../../Utils/useRequest'
 import ClientService from '../../../Services/ClientService'
 import { Button, Table } from 'antd'
 import { Link } from 'react-router-dom'
 import Loader from '../../../Components/Loader'
+import { isLead } from '../../../Utils/roles'
+import AdminAuthContext from '../../../Contexts/AdminContext'
 
 const Clients = () => {
   const {
@@ -17,8 +19,10 @@ const Clients = () => {
   }, [])
 
   const handleDelete = (id) => {
-    ClientService.remove(id).then(fetch);
+    ClientService.remove(id).then(fetch)
   }
+
+  const { adminInfo } = useContext(AdminAuthContext)
 
   const columns = [
     {
@@ -41,16 +45,20 @@ const Clients = () => {
       key: 'action',
       width: '100',
       render: (record) => (
-        <Button onClick={() => handleDelete(record.id)}>Удалить</Button>
+        <>
+          {isLead(adminInfo.role) && (
+            <Button onClick={() => handleDelete(record.id)}>Удалить</Button>
+          )}
+        </>
       ),
     },
   ]
 
   return (
     <Layout>
-      {/*<Button style={{ marginBottom: '10px' }}>*/}
-      {/*  <Link to="/admin/add-client">+ Добавить клиента</Link>*/}
-      {/*</Button>*/}
+      <Button style={{ marginBottom: '10px' }}>
+        <Link to="/admin/add-client">+ Добавить клиента</Link>
+      </Button>
       {isLoading && <Loader />}
       {payload && <Table dataSource={payload} columns={columns} />}
     </Layout>
