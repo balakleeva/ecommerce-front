@@ -1,11 +1,20 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Layout as AntLayout, Menu } from 'antd'
 import ClientAuthContext from '../../Contexts/ClientContext'
 
 const { Header, Content } = AntLayout
 
+const menuMapping = {
+  '/login': '3',
+  '/': '1',
+  '/cart': '2',
+  '/add-order': '3',
+}
+
 const Layout = ({ children }) => {
+  const { pathname } = useLocation()
+
   const { isAuth, setClient } = useContext(ClientAuthContext)
 
   const handleLogout = () => {
@@ -16,7 +25,11 @@ const Layout = ({ children }) => {
   return (
     <AntLayout style={{ height: '100%' }}>
       <Header>
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={[menuMapping[pathname]]}
+        >
           <Menu.Item key="1">
             <Link to="/">Главная</Link>
           </Menu.Item>

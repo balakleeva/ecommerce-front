@@ -5,7 +5,7 @@ import useRequest from '../../../Utils/useRequest'
 import BookService from '../../../Services/BookService'
 import Text from 'antd/lib/typography/Text'
 import { Doughnut } from '@reactchartjs/react-chart.js'
-import PurchaseService from '../../../Services/PurchaseService';
+import PurchaseService from '../../../Services/PurchaseService'
 
 const MostProductiveStaff = () => {
   const {
@@ -22,13 +22,13 @@ const MostProductiveStaff = () => {
       title: 'ID Сотрудника',
       key: 'staff.id',
       dataIndex: 'staff.id',
-      render: (data, rec) => rec.staff.id
+      render: (data, rec) => (rec.staff ? rec.staff.id : '-'),
     },
     {
       title: 'Имя сотрудника',
       key: 'staff.id',
       dataIndex: 'staff.name',
-      render: (data, rec) => rec.staff.name
+      render: (data, rec) => (rec.staff ? rec.staff.name : 'Интернет-магазин'),
     },
     {
       title: 'Сколько раз участвовал в продажах',
@@ -42,7 +42,9 @@ const MostProductiveStaff = () => {
       {payload && (
         <>
           <Row>
-            <Text style={{ fontSize: '24px' }}>Самый продуктивный сотрудник:</Text>
+            <Text style={{ fontSize: '24px' }}>
+              Самый продуктивный сотрудник:
+            </Text>
           </Row>
           <hr />
           <Text>График с продажами</Text>
@@ -50,7 +52,9 @@ const MostProductiveStaff = () => {
             width={100}
             height={50}
             data={{
-              labels: payload.map((item) => item.staff.name),
+              labels: payload.map((item) =>
+                item.staff ? item.staff.name : 'Интернет-магазин'
+              ),
               datasets: [
                 {
                   label: '# of Votes',

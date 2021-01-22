@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { Col, Layout as AntLayout, Menu, Row } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import AdminAuthContext from '../../../Contexts/AdminContext'
@@ -9,20 +9,47 @@ import { isDirector, isLead } from '../../../Utils/roles'
 const { Header, Content } = AntLayout
 
 const Layout = ({ children }) => {
+  const { pathname } = useLocation()
   const { push } = useHistory()
   const { adminInfo, isAuth, handleLogout } = useContext(AdminAuthContext)
+
+  const [selectedKey, setSelectedLey] = useState('1')
 
   const onLogout = () => {
     handleLogout()
     push('/admin/login')
   }
 
+  useEffect(() => {
+    if (pathname.includes('client')) {
+      setSelectedLey('1')
+    } else if (pathname.includes('book')) {
+      setSelectedLey('2')
+    } else if (pathname.includes('genre')) {
+      setSelectedLey('3')
+    } else if (pathname.includes('author')) {
+      setSelectedLey('4')
+    } else if (pathname.includes('purchase')) {
+      setSelectedLey('7')
+    } else if (pathname.includes('rent')) {
+      setSelectedLey('8')
+    } else if (pathname.includes('order')) {
+      setSelectedLey('10')
+    } else if (pathname.includes('staff')) {
+      setSelectedLey('6')
+    } else if (pathname.includes('login')) {
+      setSelectedLey('5')
+    }
+  }, [pathname])
+
+  console.log('sseeee', selectedKey)
+
   return (
     <AntLayout style={{ height: '100%' }}>
       <Header>
         <Row>
           <Col span={8}>
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+            <Menu theme="dark" mode="horizontal" selectedKeys={[selectedKey]}>
               {isAuth && (
                 <>
                   <Menu.Item key="1">
@@ -43,9 +70,11 @@ const Layout = ({ children }) => {
                   <Menu.Item key="8">
                     <Link to="/admin/rents">Аренды</Link>
                   </Menu.Item>
-                  {isLead(adminInfo.role) && <Menu.Item key="10">
-                    <Link to="/admin/orders">Заявки</Link>
-                  </Menu.Item>}
+                  {isLead(adminInfo.role) && (
+                    <Menu.Item key="10">
+                      <Link to="/admin/orders">Заявки</Link>
+                    </Menu.Item>
+                  )}
                   {isDirector(adminInfo.role) && (
                     <Menu.Item key="6">
                       <Link to="/admin/staff">Сотрудники</Link>
@@ -57,8 +86,8 @@ const Layout = ({ children }) => {
                 {isAuth ? (
                   <span onClick={onLogout}>Выйти</span>
                 ) : (
-                    <Link to="/admin/login">Войти</Link>
-                  )}
+                  <Link to="/admin/login">Войти</Link>
+                )}
               </Menu.Item>
             </Menu>
           </Col>

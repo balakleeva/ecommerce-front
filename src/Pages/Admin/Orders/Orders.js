@@ -43,6 +43,7 @@ const Orders = () => {
       title: 'Клиент',
       key: 'clientName',
       dataIndex: ['client', 'name'],
+      render: (record) => <span>{record ? record : '-'}</span>,
     },
     {
       title: 'Выполнена?',
